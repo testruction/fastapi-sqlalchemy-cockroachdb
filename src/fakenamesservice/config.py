@@ -4,8 +4,8 @@ import argparse
 
 from sqlalchemy.engine import URL
 
-from fakenamesservice.logging import init_logger
-from fakenamesservice.telemetry import init_tracer
+from fakenamesservice.utils.logging import init_logger
+from fakenamesservice.utils.telemetry import init_tracer
 
 # CLI arguments composition
 parser = argparse.ArgumentParser()
