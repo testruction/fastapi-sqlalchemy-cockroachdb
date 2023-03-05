@@ -4,6 +4,7 @@ python-dotenv
 fastapi
 uvicorn
 jwt
+httpx
 pandas
 sqlalchemy
 pydantic
