@@ -1,0 +1,11 @@
+pytest
+pytest-dotenv
+python-dotenv
+pandas
+sqlalchemy
+pydantic
+psycopg2-binary
+sqlalchemy-cockroachdb
+opentelemetry-exporter-otlp
+opentelemetry-instrumentation-psycopg2
+opentelemetry-instrumentation-logging
