@@ -47,7 +47,7 @@ class FakenamesBase(BaseModel):
     guid: str
     latitude: float
     longitude: float
-    
+
 class FakenamesCreate(FakenamesBase):
     pass
 

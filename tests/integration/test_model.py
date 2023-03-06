@@ -18,7 +18,7 @@ dataset = pkg_resources.resource_filename(__name__,
                                           'fakenames.csv')
 
 def lower_first(iterator):
-        return itertools.chain([next(iterator).lower()], iterator)
+    return itertools.chain([next(iterator).lower()], iterator)
 
 
 def test_model_create(dbsession):
