@@ -1,5 +1,9 @@
 # Pytest SqlAlchemy CockroachDB
 
+Architecture | Instrumentation
+------------ | ---------------
+![Architecture](./docs/diagrams/architecture.drawio.svg) | ![Instrumentation](./docs/diagrams/instrumentation.drawio.svg)
+
 Initialize the local devlopment environemnt
 
 ```bash
