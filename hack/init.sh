@@ -35,11 +35,13 @@ function init_venv()
 
 function start_infrastructure()
 {
+    pushd deploy/docker-compose
     docker compose up --detach --quiet-pull --remove-orphans
     eok "CockroachDB and Jager started"
     sleep 5
     docker compose exec roach1 sh -c 'cockroach sql --execute="SELECT VERSION()" --insecure || cockroach init --insecure'
     eok "Cockroachdb cluster \"http://localhost:8080\" initialized"
+    popd
 }
 
 
