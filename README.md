@@ -1,8 +1,9 @@
 # Pytest SqlAlchemy CockroachDB
 
+
 Architecture | Instrumentation
------------- | ---------------
-![Architecture](./docs/diagrams/architecture.drawio.svg) | ![Instrumentation](./docs/diagrams/instrumentation.drawio.svg)
+--- | ---
+![Architecture diagram](./docs/diagrams/architecture.drawio.svg) | ![Application Instrumentation](docs/diagrams/instrumentation.drawio.svg)
 
 Initialize the local devlopment environemnt
 
@@ -20,7 +21,7 @@ pytest
 Run the Web application
 
 ```bash
-hack/make-run.sh
+hack/run-app.sh
 ```
 
 Explore the various Web UIs.
