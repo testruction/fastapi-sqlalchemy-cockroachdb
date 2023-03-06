@@ -2,15 +2,25 @@ version: "3.7"
 
 services:
 
-  proxy:
+  reverse-proxy:
     image: envoyproxy/envoy:distroless-dev
     command: -c /etc/envoy/envoy.yml
     ports:
-      - "${ENVOY_ADMIN_PORT:-8081}:8081"
+      - "${ENVOY_PROXY_ADMIN_PORT:-8082}:8082"
       - "${COCKROACH_PORT:-26257}:26257"
       - "${COCKROACH_WEBUI_PORT:-8080}:8080"
     volumes:
-      - ./envoy.yml:/etc/envoy/envoy.yml
+      - ./envoy-db.yml:/etc/envoy/envoy.yml
+
+  load-balancer:
+    image: envoyproxy/envoy:distroless-dev
+    command: -c /etc/envoy/envoy.yml
+    ports:
+      - "${ENVOY_DATABASE_LB_PORT:-8081}:8081"
+      - "${COCKROACH_PORT:-26257}:26257"
+      - "${COCKROACH_WEBUI_PORT:-8080}:8080"
+    volumes:
+      - ./envoy-db.yml:/etc/envoy/envoy.yml
 
   roach1:
     image: cockroachdb/cockroach:latest-v22.2

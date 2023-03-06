@@ -3,7 +3,7 @@ set -euo pipefail
 
 source hack/libraries/custom-logger.sh -v
 
-hack/init.sh
+source hack/init.sh
 
 python3 tests/populate.py
 eok 'Database populated using "tests/integration/fakenames.csv" dataset'
