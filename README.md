@@ -16,7 +16,7 @@ pytest
 Run the Web application
 
 ```bash
-hack-run.sh
+hack/make-run.sh
 ```
 
 Explore the various Web UIs.
