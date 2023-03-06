@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
 
-  reverse-proxy:
+  database-lb:
     image: envoyproxy/envoy:distroless-dev
     command: -c /etc/envoy/envoy.yml
     ports:
@@ -10,7 +10,7 @@ services:
       - "${COCKROACH_PORT:-26257}:26257"
       - "${COCKROACH_WEBUI_PORT:-8080}:8080"
     volumes:
-      - ./envoy-db.yml:/etc/envoy/envoy.yml
+      - ./envoy-rdb.yml:/etc/envoy/envoy.yml
 
   load-balancer:
     image: envoyproxy/envoy:distroless-dev
