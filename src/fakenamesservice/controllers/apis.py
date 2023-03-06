@@ -21,6 +21,14 @@ def get_db():
 class FakenamesApis():
     router = APIRouter()
 
+    @router.post('/apis/v1/fakenames', response_model=schemas.Fakenames)
+    async def put(identity: schemas.FakenamesCreate, db: Session = Depends(get_db)):
+        """ Returns a fake identity based on its GUID """
+        check = crud.read(db, guid=identity.guid)
+        if identity is None:
+            raise HTTPException(status_code=400, detail=f'Identity already exists with guid "{check.guid}"')
+        return crud.create_user(db=db, identity=identity)
+
     @router.get('/apis/v1/fakenames', response_model=List[schemas.Fakenames])
     async def get_all(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
         """ Returns all fake identities """
