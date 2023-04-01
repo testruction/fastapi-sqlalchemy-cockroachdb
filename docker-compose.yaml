@@ -1,0 +1,101 @@
+version: "3.7"
+
+services:
+
+  database-lb:
+    image: envoyproxy/envoy:distroless-dev
+    command: -c /etc/envoy/envoy.yml
+    ports:
+      - "${ENVOY_PROXY_ADMIN_PORT:-8082}:8082"
+      - "${COCKROACH_PORT:-26257}:26257"
+      - "${COCKROACH_WEBUI_PORT:-8080}:8080"
+    volumes:
+      - ./deploy/envoy/envoy-rdb.yml:/etc/envoy/envoy.yml
+
+  # load-balancer:
+  #   image: envoyproxy/envoy:distroless-dev
+  #   command: -c /etc/envoy/envoy.yml
+  #   ports:
+  #     - "${ENVOY_DATABASE_LB_PORT:-8081}:8081"
+  #     - "${COCKROACH_PORT:-26257}:26257"
+  #     - "${COCKROACH_WEBUI_PORT:-8080}:8080"
+  #   volumes:
+  #     - ./deploy/envoy/envoy-db.yml:/etc/envoy/envoy.yml
+
+  roach1:
+    image: cockroachdb/cockroach:latest-v22.2
+    command: start --insecure --join=roach1,roach2,roach3 --advertise-addr=roach1
+    volumes:
+      - /cockroach/cockroach-data
+
+  roach2:
+    image: cockroachdb/cockroach:latest-v22.2
+    command: start --insecure --join=roach1,roach2,roach3 --advertise-addr=roach2
+    volumes:
+      - /cockroach/cockroach-data
+
+  roach3:
+    image: cockroachdb/cockroach:latest-v22.2
+    command: start --insecure --join=roach1,roach2,roach3 --advertise-addr=roach3
+    volumes:
+      - /cockroach/cockroach-data
+
+  jaeger:
+    image: quay.io/jaegertracing/all-in-one:latest
+    restart: always
+    environment:
+      LOG_LEVEL: debug
+      COLLECTOR_OTLP_ENABLED: 'true'
+    ports:
+      - "${JARGER_WEBUI_PORT:-16686}:16686"
+      - "${OTLP_EXPORTER_PORT:-4317}:4317"
+
+  backend:
+    restart: on-failure:5 
+    build:
+      context: ./src/backend
+      args:
+        IMAGE_VERSION: ${VERSION}
+    image: oci.local/${PROJECT_NAMESPACE}/${PROJECT_NAME}/backend:${VERSION}
+    # command: tail -f /dev/null
+    command: hypercorn --bind 0.0.0.0:8000 asgi:app --reload
+    ports:
+      - "58001:8000"
+    environment:
+      TZ: Canada/Montreal
+      # OTLP GRPC
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://jaeger:4317}
+      OTEL_EXPORTER_OTLP_INSECURE: ${OTEL_EXPORTER_OTLP_INSECURE:-true}
+      # Snowflake
+      COCKROACH_HOST: ${COCKROACH_HOST:-database-lb}
+      COCKROACH_USER: ${COCKROACH_USER:-root}
+      COCKROACH_PASSWORD: ${COCKROACH_PASSWORD:-password}
+      COCKROACH_PORT: ${COCKROACH_PORT:-26257}
+    links:
+      - jaeger
+      - database-lb
+    volumes:
+      - ./src/backend/src:/usr/local/app/src
+
+  frontend:
+    restart: on-failure:5 
+    build:
+      context: ./src/frontend
+      args:
+        IMAGE_VERSION: ${VERSION}
+    image: oci.local/${PROJECT_NAMESPACE}/${PROJECT_NAME}/frontend:${VERSION}
+    # command: tail -f /dev/null
+    command: hypercorn --bind 0.0.0.0:8000 asgi:app --reload
+    ports:
+      - "58000:8000"
+    environment:
+      BACKEND_API_URL: http://backend:8000
+      TZ: Canada/Montreal
+      # OTLP GRPC
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://jaeger:4317}
+      OTEL_EXPORTER_OTLP_INSECURE: ${OTEL_EXPORTER_OTLP_INSECURE:-true}
+    links:
+      - backend
+      - jaeger
+    volumes:
+      - ./src/frontend/src:/usr/local/app/src

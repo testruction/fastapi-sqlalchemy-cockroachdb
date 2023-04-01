@@ -1,0 +1,348 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "apigateway_python-webdemo",
+    "dateExported": "2023-03-30T21:03:25.088Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "a9e8a0fb-7d39-4121-8593-d180c62b046b",
+            "colId": "999347a1-02ca-451f-bb27-9f15d394b7b4",
+            "containerId": "",
+            "name": "Health",
+            "url": "{{invoke_url}}/health",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-03-28T21:26:01.783Z",
+            "modified": "2023-03-30T17:58:28.901Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "OK"
+                }
+            ]
+        },
+        {
+            "_id": "c32e4023-feb5-4b62-af30-9dbfd7751207",
+            "colId": "999347a1-02ca-451f-bb27-9f15d394b7b4",
+            "containerId": "",
+            "name": "Snowflake: Fakenames",
+            "url": "{{invoke_url}}/fakenames/snowflake?skip=30&limit=1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-03-28T21:29:39.436Z",
+            "modified": "2023-03-30T20:56:00.845Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "skip",
+                    "value": "30",
+                    "isPath": false
+                },
+                {
+                    "name": "limit",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.number",
+                    "action": "equal",
+                    "value": "31"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "application/json"
+                }
+            ]
+        },
+        {
+            "_id": "3c379b90-414d-43d0-a8e1-688c0b835598",
+            "colId": "999347a1-02ca-451f-bb27-9f15d394b7b4",
+            "containerId": "",
+            "name": "Snowflake: Fakename",
+            "url": "{{invoke_url}}/fakenames/snowflake",
+            "method": "POST",
+            "sortNum": 25000,
+            "created": "2023-03-28T22:08:15.968Z",
+            "modified": "2023-03-30T20:56:24.348Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"number\": 2023,\n    \"gender\": \"female\",\n    \"nameset\": \"American\",\n    \"title\": \"Mrs.\",\n    \"givenname\": \"Sherry\",\n    \"middleinitial\": \"B\",\n    \"surname\": \"Morris\",\n    \"streetaddress\": \"4681 Harvest Moon Dr\",\n    \"city\": \"Unionville\",\n    \"state\": \"ON\",\n    \"statefull\": \"Ontario\",\n    \"zipcode\": \"L3R 0L7\",\n    \"country\": \"CA\",\n    \"countryfull\": \"Canada\",\n    \"emailaddress\": \"SherryBMorris@armyspy.com\",\n    \"username\": \"Buiting\",\n    \"password\": \"iXeim4bei1\",\n    \"browseruseragent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1 Safari/605.1.15\",\n    \"telephonenumber\": \"905-475-2211\",\n    \"telephonecountrycode\": 1,\n    \"mothersmaiden\": \"Richburg\",\n    \"birthday\": \"1924-07-18T00:00:00\",\n    \"age\": 96,\n    \"tropicalzodiac\": \"Cancer\",\n    \"cctype\": \"MasterCard\",\n    \"ccnumber\": \"5455508902042515\",\n    \"cvv2\": 347,\n    \"ccexpires\": \"12/2023\",\n    \"nationalid\": \"400 523 585\",\n    \"ups\": \"1Z A35 587 62 2388 228 3\",\n    \"westernunionmtcn\": \"3523800126\",\n    \"moneygrammtcn\": \"69095187\",\n    \"color\": \"White\",\n    \"occupation\": \"Manpower development manager\",\n    \"company\": \"The Warner Brothers Store\",\n    \"vehicle\": \"2006 Morgan 44\",\n    \"domain\": \"NewspaperPro.ca\",\n    \"bloodtype\": \"B+\",\n    \"pounds\": 171.2,\n    \"kilograms\": 77.8,\n    \"feetinches\": \"5' 4\\\"\",\n    \"centimeters\": 163,\n    \"guid\": \"not-a-proper-guid\",\n    \"latitude\": 43.826989,\n    \"longitude\": -79.296342\n  }",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "application/json"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.number",
+                    "action": "equal",
+                    "value": "2023"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.guid",
+                    "action": "equal",
+                    "value": "not-a-proper-guid"
+                }
+            ]
+        },
+        {
+            "_id": "7a8828a0-8dd2-4496-8c43-d9efef9b7676",
+            "colId": "999347a1-02ca-451f-bb27-9f15d394b7b4",
+            "containerId": "",
+            "name": "Snowflake: Fakename",
+            "url": "{{invoke_url}}/fakenames/snowflake/{guid}",
+            "method": "GET",
+            "sortNum": 25625,
+            "created": "2023-03-28T21:59:14.259Z",
+            "modified": "2023-03-30T20:56:20.758Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "guid",
+                    "value": "not-a-proper-guid",
+                    "isPath": true
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.username",
+                    "action": "contains",
+                    "value": "Buiting"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.number",
+                    "action": "equal",
+                    "value": "2023"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "application/json"
+                }
+            ]
+        },
+        {
+            "_id": "a2368d76-8606-4588-a4e8-08a557ae7276",
+            "colId": "999347a1-02ca-451f-bb27-9f15d394b7b4",
+            "containerId": "",
+            "name": "Snowflake: Fakename",
+            "url": "{{invoke_url}}/fakenames/snowflake",
+            "method": "PATCH",
+            "sortNum": 26250,
+            "created": "2023-03-30T14:20:23.423Z",
+            "modified": "2023-03-30T20:56:34.559Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"number\": 2023,\n    \"gender\": \"female\",\n    \"nameset\": \"American\",\n    \"title\": \"Mrs.\",\n    \"givenname\": \"Sherry\",\n    \"middleinitial\": \"B\",\n    \"surname\": \"Morris\",\n    \"streetaddress\": \"1000 Pl. Jean-Paul-Riopelle\",\n    \"city\": \"Montréal\",\n    \"state\": \"QC\",\n    \"statefull\": \"Québec\",\n    \"zipcode\": \"H2Z 2B3\",\n    \"country\": \"CA\",\n    \"countryfull\": \"Canada\",\n    \"emailaddress\": \"SherryBMorris@armyspy.com\",\n    \"username\": \"Buiting\",\n    \"password\": \"iXeim4bei1\",\n    \"browseruseragent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1 Safari/605.1.15\",\n    \"telephonenumber\": \"905-475-2211\",\n    \"telephonecountrycode\": 1,\n    \"mothersmaiden\": \"Richburg\",\n    \"birthday\": \"1924-07-18T00:00:00\",\n    \"age\": 96,\n    \"tropicalzodiac\": \"Cancer\",\n    \"cctype\": \"MasterCard\",\n    \"ccnumber\": \"5455508902042515\",\n    \"cvv2\": 347,\n    \"ccexpires\": \"12/2023\",\n    \"nationalid\": \"400 523 585\",\n    \"ups\": \"1Z A35 587 62 2388 228 3\",\n    \"westernunionmtcn\": \"3523800126\",\n    \"moneygrammtcn\": \"69095187\",\n    \"color\": \"White\",\n    \"occupation\": \"Manpower development manager\",\n    \"company\": \"The Warner Brothers Store\",\n    \"vehicle\": \"2006 Morgan 44\",\n    \"domain\": \"NewspaperPro.ca\",\n    \"bloodtype\": \"B+\",\n    \"pounds\": 171.2,\n    \"kilograms\": 77.8,\n    \"feetinches\": \"5' 4\\\"\",\n    \"centimeters\": 163,\n    \"guid\": \"not-a-proper-guid\",\n    \"latitude\": 43.826989,\n    \"longitude\": -79.296342\n  }",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "application/json"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.guid",
+                    "action": "equal",
+                    "value": "not-a-proper-guid"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.streetaddress",
+                    "action": "equal",
+                    "value": "1000 Pl. Jean-Paul-Riopelle"
+                }
+            ]
+        },
+        {
+            "_id": "0f2c2fe6-5f18-4014-a779-a868dcc691a4",
+            "colId": "999347a1-02ca-451f-bb27-9f15d394b7b4",
+            "containerId": "",
+            "name": "Snowflake: Fakename",
+            "url": "{{invoke_url}}/fakenames/snowflake/not-a-proper-guid",
+            "method": "DELETE",
+            "sortNum": 27500,
+            "created": "2023-03-30T14:17:08.079Z",
+            "modified": "2023-03-30T20:56:45.416Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "application/json"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.guid",
+                    "action": "equal",
+                    "value": "not-a-proper-guid"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.deleted",
+                    "action": "equal",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "_id": "609aba57-4388-4bde-91e3-d229c89043e9",
+            "colId": "999347a1-02ca-451f-bb27-9f15d394b7b4",
+            "containerId": "",
+            "name": "S3: Fakenames",
+            "url": "{{invoke_url}}/fakenames/s3?skip=0&limit=1",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-03-28T22:11:36.034Z",
+            "modified": "2023-03-30T21:03:08.422Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "skip",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "limit",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.Number",
+                    "action": "equal",
+                    "value": "1"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "application/json"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.GUID",
+                    "action": "equal",
+                    "value": "5296d9c8-0692-4d3b-b51b-e183a71b465c"
+                }
+            ]
+        },
+        {
+            "_id": "53a7c408-0574-4af5-9164-113c538e0076",
+            "colId": "999347a1-02ca-451f-bb27-9f15d394b7b4",
+            "containerId": "",
+            "name": "S3: Fakename",
+            "url": "{{invoke_url}}/fakenames/s3/{guid}",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-03-28T22:13:14.067Z",
+            "modified": "2023-03-30T21:01:38.580Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "guid",
+                    "value": "c05c8c2f-dd61-4e61-a28f-fcbad2c0b37e",
+                    "isPath": true
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.StreetAddress",
+                    "action": "equal",
+                    "value": "3151EmbroSt"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.Number",
+                    "action": "equal",
+                    "value": "81"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "application/json"
+                }
+            ]
+        }
+    ],
+    "settings": {}
+}

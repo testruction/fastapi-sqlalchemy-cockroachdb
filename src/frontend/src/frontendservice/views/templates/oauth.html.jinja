@@ -1,0 +1,17 @@
+{% extends "layout.html.jinja" %}
+
+{% block content %}
+<div class="card">
+  <h1 class="site-title">Access Token</h1>
+  <h2>Encoded</h2>
+  <code>{{ access_token }}</code>
+  <h2>Decoded</h2>
+  <code>{{ access_token_decoded }}</code>
+
+  <h1 class="site-title">ID Token</h1>
+  <h2>Encoded</h2>
+  <code>{{ id_token }}</code>
+  <h2>Decoded</h2>
+  <code>{{ id_token_decoded }}</code>
+</div>
+{% endblock %}
