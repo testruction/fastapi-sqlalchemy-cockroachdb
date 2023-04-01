@@ -123,8 +123,8 @@ python3 tests/populate.py
 
 Explore the various Web UIs.
 
-CockroachDB: <http://localhost:8080>
-Jaeger ui: <http://localhost:16686>
-Envoy admin: <http://localhost:8081>
-FastAPI swagger: <http://locallhost:8001/v1/docs>
-Webui: <http://locallhost:8000>
+* CockroachDB: <http://localhost:8080>
+* Jaeger ui: <http://localhost:16686>
+* Envoy admin: <http://localhost:8081>
+* FastAPI swagger: <http://locallhost:8001/v1/docs>
+* Webui: <http://locallhost:8000>
