@@ -1,0 +1,661 @@
+openapi: 3.0.3
+
+
+info:
+  title: app2-internal
+  description: API de gestion d'identités factices (Fakenames)
+  version: 1.0.0
+
+
+paths:
+  /v1/fakenames/snowflake:
+    get:
+      description: 'Returns all fake identities (default=100/1000)'
+      parameters:
+        - name: skip
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Successful reponse
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SnowflakeFakenames'
+              examples:
+                value:
+                  $ref: '#/components/examples/SnowflakeFakenames'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      description: Returns a fake identity based on its GUID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnowflakeFakenames'
+        required: true
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnowflakeFakenames'
+              examples:
+                value:
+                  $ref: '#/components/examples/SnowflakeFakenames'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      description: Update an existing fake identity based on its GUID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnowflakeFakenames'
+        required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnowflakeFakenames'
+              examples:
+                value:
+                  $ref: '#/components/examples/SnowflakeFakenames'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/fakenames/snowflake/{guid}:
+    get:
+      description: Returns a fake identity based on its GUID
+      parameters:
+        - name: guid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnowflakeFakenames'
+              examples:
+                value:
+                  $ref: '#/components/examples/SnowflakeFakenames'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      description: Returns a fake identity based on its GUID
+      parameters:
+        - name: guid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnowflakeFakenamesDelete'
+              examples:
+                value:
+                  $ref: '#/components/examples/SnowflakeFakenamesDelete'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+
+  /v1/fakenames/s3:
+    get:
+      description: Returns all fake identities (default=100/1000)
+      parameters:
+        - name: skip
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/S3Fakenames'
+              examples:
+                value:
+                  $ref: '#/components/examples/S3Fakenames'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/fakenames/s3/{guid}:
+    get:
+      description: Returns a fake identity based on its GUID
+      parameters:
+        - name: guid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3Fakenames'
+              examples:
+                value:
+                  $ref: '#/components/examples/S3Fakenames'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /health:
+    get:
+      summary: Health Page
+      responses:
+        '200':
+          description: Successful Response
+          # content:
+          #   text/plain:
+          #     examples:
+          #       value: "OK"
+
+
+components:
+  schemas:
+    SnowflakeFakenames:
+      required:
+        - number
+        - gender
+        - nameset
+        - title
+        - givenname
+        - middleinitial
+        - surname
+        - streetaddress
+        - city
+        - state
+        - statefull
+        - zipcode
+        - country
+        - countryfull
+        - emailaddress
+        - username
+        - password
+        - browseruseragent
+        - telephonenumber
+        - telephonecountrycode
+        - mothersmaiden
+        - birthday
+        - age
+        - tropicalzodiac
+        - cctype
+        - ccnumber
+        - cvv2
+        - ccexpires
+        - nationalid
+        - ups
+        - westernunionmtcn
+        - moneygrammtcn
+        - color
+        - occupation
+        - company
+        - vehicle
+        - domain
+        - bloodtype
+        - pounds
+        - kilograms
+        - feetinches
+        - centimeters
+        - guid
+        - latitude
+        - longitude
+      type: object
+      properties:
+        number:
+          type: integer
+        gender:
+          type: string
+        nameset:
+          type: string
+        title:
+          type: string
+        givenname:
+          type: string
+        middleinitial:
+          type: string
+        surname:
+          type: string
+        streetaddress:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        statefull:
+          type: string
+        zipcode:
+          type: string
+        country:
+          type: string
+        countryfull:
+          type: string
+        emailaddress:
+          type: string
+          format: email
+        username:
+          type: string
+        password:
+          type: string
+        browseruseragent:
+          type: string
+        telephonenumber:
+          type: string
+        telephonecountrycode:
+          type: integer
+        mothersmaiden:
+          type: string
+        birthday:
+          type: string
+          format: date-time
+        age:
+          type: integer
+        tropicalzodiac:
+          type: string
+        cctype:
+          type: string
+        ccnumber:
+          type: string
+        cvv2:
+          type: integer
+        ccexpires:
+          type: string
+        nationalid:
+          type: string
+        ups:
+          type: string
+        westernunionmtcn:
+          type: string
+        moneygrammtcn:
+          type: string
+        color:
+          type: string
+        occupation:
+          type: string
+        company:
+          type: string
+        vehicle:
+          type: string
+        domain:
+          type: string
+        bloodtype:
+          type: string
+        pounds:
+          type: number
+        kilograms:
+          type: number
+        feetinches:
+          type: string
+        centimeters:
+          type: integer
+        guid:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+    SnowflakeFakenamesDelete:
+      required:
+        - deleted
+        - gender
+        - nameset
+        - title
+        - givenname
+        - middleinitial
+        - surname
+        - guid
+      type: object
+      properties:
+        deleted:
+          type: boolean
+        gender:
+          type: string
+        nameset:
+          type: string
+        title:
+          type: string
+        givenname:
+          type: string
+        middleinitial:
+          type: string
+        surname:
+          type: string
+        guid:
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    S3Fakenames:
+      required:
+        - Number
+        - Gender
+        - NameSet
+        - Title
+        - GivenName
+        - MiddleInitial
+        - Surname
+        - StreetAddress
+        - City
+        - State
+        - StateFull
+        - ZipCode
+        - Country
+        - CountryFull
+        - EmailAddress
+        - Username
+        - Password
+        - BrowserUserAgent
+        - TelephoneNumber
+        - TelephoneCountryCode
+        - MothersMaiden
+        - Birthday
+        - Age
+        - TropicalZodiac
+        - CCType
+        - CCNumber
+        - CVV2
+        - CCExpires
+        - NationalID
+        - UPS
+        - WesternUnionMTCN
+        - MoneyGramMTCN
+        - Color
+        - Occupation
+        - Company
+        - Vehicle
+        - Domain
+        - BloodType
+        - Pounds
+        - Kilograms
+        - FeetInches
+        - Centimeters
+        - GUID
+        - Latitude
+        - Longitude
+      type: object
+      properties:
+        Number:
+          type: integer
+        Gender:
+          type: string
+        NameSet:
+          type: string
+        Title:
+          type: string
+        GivenName:
+          type: string
+        MiddleInitial:
+          type: string
+        Surname:
+          type: string
+        StreetAddress:
+          type: string
+        City:
+          type: string
+        State:
+          type: string
+        StateFull:
+          type: string
+        ZipCode:
+          type: string
+        Country:
+          type: string
+        CountryFull:
+          type: string
+        EmailAddress:
+          type: string
+          format: email
+        Username:
+          type: string
+        Password:
+          type: string
+        BrowserUserAgent:
+          type: string
+        TelephoneNumber:
+          type: string
+        TelephoneCountryCode:
+          type: integer
+        MothersMaiden:
+          type: string
+        Birthday:
+          type: string
+          format: date-time
+        Age:
+          type: integer
+        TropicalZodiac:
+          type: string
+        CCType:
+          type: string
+        CCNumber:
+          type: string
+        CVV2:
+          type: integer
+        CCExpires:
+          type: string
+        NationalID:
+          type: string
+        UPS:
+          type: string
+        WesternUnionMTCN:
+          type: string
+        MoneyGramMTCN:
+          type: string
+        Color:
+          type: string
+        Occupation:
+          type: string
+        Company:
+          type: string
+        Vehicle:
+          type: string
+        Domain:
+          type: string
+        BloodType:
+          type: string
+        Pounds:
+          type: number
+        Kilograms:
+          type: number
+        FeetInches:
+          type: string
+        Centimeters:
+          type: integer
+        GUID:
+          type: string
+        Latitude:
+          type: number
+        Longitude:
+          type: number
+
+  examples:
+    SnowflakeFakenames:
+      value:
+        number: 31
+        gender: female
+        nameset: England/Wales
+        title: Ms.
+        givenname: Madison
+        middleinitial: J
+        surname: Potter
+        streetaddress: 1789 Bay Street
+        city: Toronto
+        state: ON
+        statefull: Ontario
+        zipcode: M5J 2R8
+        country: CA
+        countryfull: Canada
+        emailaddress: MadisonPotter@armyspy.com
+        username: Forridgen
+        password: mai5FeePh
+        browseruseragent: Mozilla/5.0 (X11; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0
+        telephonenumber: 416-838-8341
+        telephonecountrycode: 1
+        mothersmaiden: Francis
+        birthday: 1929-05-09T00:00:00
+        age: 92
+        tropicalzodiac: Taurus
+        cctype: MasterCard
+        ccnumber: "5151077630787137"
+        cvv2: 499
+        ccexpires: 2/2025
+        nationalid: 332 135 516
+        ups: 1Z 103 1E7 77 4596 925 9
+        westernunionmtcn: 5075057505
+        moneygrammtcn: 54896642
+        color: Purple
+        occupation: Florist
+        company: Kinney Shoes
+        vehicle: 2008 Mercury Mariner
+        domain: ForeclosureCities.ca
+        bloodtype: O+
+        pounds: 120.6
+        kilograms: 54.8
+        feetinches: 5' 3\"
+        centimeters: 159
+        guid: 1457a700-66ed-4e72-9d6d-6498017e315d
+        latitude: 43.68542
+        longitude: -79.482084
+    SnowflakeFakenamesDelete:
+      value:
+        deleted: true
+        gender: female
+        nameset: England/Wales
+        title: Ms.
+        givenname: Madison
+        middleinitial: J
+        surname: Potter
+        guid: 1457a700-66ed-4e72-9d6d-6498017e315d
+    S3Fakenames:
+      value:
+        Number: 23
+        Gender: female
+        NameSet: American
+        Title: Mrs.
+        GivenName: Sherry
+        MiddleInitial: B
+        Surname: Morris
+        StreetAddress: 4681HarvestMoonDr
+        City: Unionville
+        State: ON
+        StateFull: Ontario
+        ZipCode: L3R0L7
+        Country: CA
+        CountryFull: Canada
+        EmailAddress: SherryBMorris@armyspy.com
+        Username: Buiting
+        Password: iXeim4bei1
+        BrowserUserAgent: Mozilla/5.0(Macintosh;IntelMacOSX10_14_4)AppleWebKit/605.1.15(KHTML,likeGecko)Version/12.1Safari/605.1.15
+        TelephoneNumber: 905-475-2211
+        TelephoneCountryCode: 1
+        MothersMaiden: Richburg
+        Birthday: 7/18/1924
+        Age: 96
+        TropicalZodiac: Cancer
+        CCType: MasterCard
+        CCNumber: "5455508902042515"
+        CVV2: 347
+        CCExpires: 12/2023
+        NationalID: 400523585
+        UPS: 1ZA355876223882283
+        WesternUnionMTCN: 3523800126
+        MoneyGramMTCN: 69095187
+        Color: White
+        Occupation: Manpowerdevelopmentmanager
+        Company: TheWarnerBrothersStore
+        Vehicle: 2006Morgan44
+        Domain: NewspaperPro.ca
+        BloodType: B+
+        Pounds: 171.2
+        Kilograms: 77.8
+        FeetInches: 5'4\"
+        Centimeters: 163
+        GUID: 4b8be3d7-4fc0-47f5-a122-c74146ec7d38
+        Latitude: 43.826989
+        Longitude: -79.296342
