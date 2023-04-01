@@ -89,7 +89,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      BACKEND_API_URL: http://backend:8000
+      BACKEND_API_URL: http://backend:8001
       TZ: Canada/Montreal
       # OTLP GRPC
       OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://jaeger:4317}

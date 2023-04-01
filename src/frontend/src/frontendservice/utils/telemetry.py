@@ -9,7 +9,6 @@ from opentelemetry.sdk.trace.export import (ConsoleSpanExporter,
 
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 
-from opentelemetry.sdk.extension.aws.trace import AwsXRayIdGenerator
 from opentelemetry.instrumentation.httpx import HTTPXClientInstrumentor
 
 from frontendservice.utils.userid import get_openid_user
@@ -22,9 +21,7 @@ def init_tracer(args):
     resource = Resource.create(attributes={"service.namespace": "io.testruction",
                                            "service.name": "webdemo"})
 
-    trace.set_tracer_provider(TracerProvider(id_generator=AwsXRayIdGenerator(),
-                                             resource=resource))
-    provider = TracerProvider()
+    provider = TracerProvider(resource=resource)
     otlp_exporter = OTLPSpanExporter()
     otlp_processor = BatchSpanProcessor(otlp_exporter)
     provider.add_span_processor(otlp_processor)
