@@ -58,9 +58,9 @@ services:
         IMAGE_VERSION: ${VERSION}
     image: oci.local/${PROJECT_NAMESPACE}/${PROJECT_NAME}/backend:${VERSION}
     # command: tail -f /dev/null
-    command: hypercorn --bind 0.0.0.0:8000 asgi:app --reload
+    command: hypercorn --bind 0.0.0.0:8001 asgi:app --reload
     ports:
-      - "58001:8000"
+      - "8001:8001"
     environment:
       TZ: Canada/Montreal
       # OTLP GRPC
@@ -87,7 +87,7 @@ services:
     # command: tail -f /dev/null
     command: hypercorn --bind 0.0.0.0:8000 asgi:app --reload
     ports:
-      - "58000:8000"
+      - "8000:8000"
     environment:
       BACKEND_API_URL: http://backend:8000
       TZ: Canada/Montreal
