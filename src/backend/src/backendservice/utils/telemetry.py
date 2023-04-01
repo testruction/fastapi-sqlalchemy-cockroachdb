@@ -16,10 +16,9 @@ def init_tracer(args):
     resource = Resource.create(attributes={"service.namespace": "io.testruction",
                                            "service.name": "webdemo"})
 
-
-    provider = TracerProvider()
-    # processor = BatchSpanProcessor(ConsoleSpanExporter())
-    # provider.add_span_processor(processor)
+    provider = TracerProvider(resource=resource)
+    processor = BatchSpanProcessor(ConsoleSpanExporter())
+    provider.add_span_processor(processor)
 
     otlp_exporter = OTLPSpanExporter()
     otlp_processor = BatchSpanProcessor(otlp_exporter)
