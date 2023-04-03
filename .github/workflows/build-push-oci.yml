@@ -1,0 +1,106 @@
+name: Backend Container Images
+on:
+ push:
+  paths:
+    - 'src/backend/**'
+    - 'src/frontend/**'
+  pull_request:
+    paths:
+    - 'src/backend/**'
+    - 'src/frontend/**'
+
+env:
+  ORGANIZATION: "testruction"
+  PROJECT_NAME: "fastapi-sqlalchemy-cockroachdb"
+
+jobs:
+  build:
+    name: "Build OCI image: ${{ matrix.image }}"
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        image:
+          - backend
+          - frontend
+
+    steps:
+      - uses: FranzDiebold/github-env-vars-action@v1.2.1
+
+      - name: Checkout code base
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          install: true
+      
+      - name: Set ENV variables
+        run: |
+          echo "VERSION=$(cat ./src/{{ matrix.image }}/VERSION)" >> $GITHUB_ENV
+          echo "GIT_SHORT_HASH=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          registry: docker.io
+          username: nobody
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1 
+        with:
+          registry: ghcr.io
+          username: nobody
+          password: ${{ secrets.GH_PACAKGES_TOKEN }} 
+
+      - name: Build OCI compliant container image
+        id: container_image_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./src/${{ matrix.image }}
+          load: true
+          build-args:
+            - IMAGE_VERSION=${{ env.VERSION }}
+          tags: docker.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }}
+          file: ./src/${{ matrix.image }}/Dockerfile
+          platforms: linux/amd64
+
+      - name: Scan for vulnerabilities
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: docker.io/${{ env.ORGANIZATION }}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }}
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Push image to Docker Hub registry
+        id: dockerhub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./src/${{ matrix.image }}
+          push: true
+          tags: >-
+            docker.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:${{ env.VERSION }},
+            docker.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }},
+            docker.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:latest
+          file: ./src/${{ matrix.image }}/Dockerfile
+          platforms: linux/amd64
+      
+      - name: Push image to GitHub Container Registry
+        id: ghcr
+        uses: docker/build-push-action@v2
+        with:
+          context: ./src/${{ matrix.image }}
+          push: true
+          tags: >-
+            ghcr.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:${{ env.VERSION }},
+            ghcr.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }},
+            ghcr.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:latest
+          file: ./src/${{ matrix.image }}/Dockerfile
+          platforms: linux/amd64
