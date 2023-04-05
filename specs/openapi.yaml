@@ -4,7 +4,7 @@ openapi: 3.0.3
 info:
   title: app2-internal
   description: API de gestion d'identités factices (Fakenames)
-  version: 0.1.6
+  version: 0.1.7
 
 
 paths:
