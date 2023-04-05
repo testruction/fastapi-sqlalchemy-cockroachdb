@@ -64,7 +64,7 @@ jobs:
           context: ./src/${{ matrix.image }}
           load: true
           build-args:
-            - IMAGE_VERSION=${{ env.VERSION }}
+            IMAGE_VERSION: ${{ env.VERSION }}
           tags: docker.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }}
           file: ./src/${{ matrix.image }}/Dockerfile
           platforms: linux/amd64
