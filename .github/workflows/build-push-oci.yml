@@ -65,7 +65,7 @@ jobs:
           load: true
           build-args:
             IMAGE_VERSION="${{ env.VERSION }}"
-          tags: docker.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }}
+          tags: docker.io/${{ env.ORGANIZATION }}/${{ env.PROJECT_NAME }}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }}
           file: ./src/${{ matrix.image }}/Dockerfile
           platforms: linux/amd64
 
@@ -86,9 +86,9 @@ jobs:
           context: ./src/${{ matrix.image }}
           push: true
           tags: >-
-            docker.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:${{ env.VERSION }},
-            docker.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }},
-            docker.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:latest
+            docker.io/${{ env.ORGANIZATION }}/${{ env.PROJECT_NAME }}/${{ matrix.image }}:${{ env.VERSION }},
+            docker.io/${{ env.ORGANIZATION }}/${{ env.PROJECT_NAME }}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }},
+            docker.io/${{ env.ORGANIZATION }}/${{ env.PROJECT_NAME }}/${{ matrix.image }}:latest
           file: ./src/${{ matrix.image }}/Dockerfile
           platforms: linux/amd64
       
@@ -99,8 +99,8 @@ jobs:
           context: ./src/${{ matrix.image }}
           push: true
           tags: >-
-            ghcr.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:${{ env.VERSION }},
-            ghcr.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }},
-            ghcr.io/${{ env.ORGANIZATION }}/${env.PROJECT_NAME}/${{ matrix.image }}:latest
+            ghcr.io/${{ env.ORGANIZATION }}/${{ env.PROJECT_NAME }}/${{ matrix.image }}:${{ env.VERSION }},
+            ghcr.io/${{ env.ORGANIZATION }}/${{ env.PROJECT_NAME }}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }},
+            ghcr.io/${{ env.ORGANIZATION }}/${{ env.PROJECT_NAME }}/${{ matrix.image }}:latest
           file: ./src/${{ matrix.image }}/Dockerfile
           platforms: linux/amd64
