@@ -1,4 +1,4 @@
-name: Backend Container Images
+name: Container Images
 on:
  push:
   paths:

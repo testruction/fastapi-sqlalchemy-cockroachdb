@@ -1,5 +1,7 @@
 # FastAPI SqlAlchemy CockroachDB
 
+[![Backend Container Images](https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/actions/workflows/build-push-oci.yml/badge.svg)](https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/actions/workflows/build-push-oci.yml)
+
 This project aims to demonstrate the implementation of the following architectural patterns in Python.
 
 * Model-View-Controller (MVC)
