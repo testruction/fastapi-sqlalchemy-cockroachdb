@@ -66,14 +66,16 @@ jobs:
           load: true
           build-args:
             IMAGE_VERSION="${{ env.VERSION }}"
-          tags: docker.io/${{ env.ORGANIZATION }}/${{ env.PROJECT_NAME }}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }}
+          tags: >-
+            docker.io/${{ env.ORGANIZATION }}/${{ env.PROJECT_NAME }}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }},
+            ghcr.io/${{ env.ORGANIZATION }}/${{ env.PROJECT_NAME }}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }}
           file: ./src/${{ matrix.image }}/Dockerfile
           platforms: linux/amd64
 
       - name: Scan for vulnerabilities
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: docker.io/${{ env.ORGANIZATION }}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }}
+          image-ref: docker.io/${{ env.ORGANIZATION }}/${{ env.PROJECT_NAME }}/${{ matrix.image }}:${{ env.GIT_SHORT_HASH }}
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
