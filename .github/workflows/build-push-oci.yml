@@ -1,13 +1,14 @@
 name: Container Images
 on:
- push:
-  paths:
-    - 'src/backend/**'
-    - 'src/frontend/**'
-  pull_request:
+  push:
     paths:
-    - 'src/backend/**'
-    - 'src/frontend/**'
+      - '.github/workflows/**'
+      - 'src/backend/**'
+      - 'src/frontend/**'
+    pull_request:
+      paths:
+        - 'src/backend/**'
+        - 'src/frontend/**'
 
 env:
   ORGANIZATION: "testruction"
