@@ -55,7 +55,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ vars.GH_USERNAME }}
-          password: ${{ secrets.GH_PACAKGES_TOKEN }} 
+          password: ${{ secrets.GH_PACKAGES_TOKEN }} 
 
       - name: Build OCI compliant container image
         id: container_image_build
