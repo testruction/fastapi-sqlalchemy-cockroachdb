@@ -141,7 +141,7 @@ def delete(db: Session, guid: str) -> bool:
             response['middleinitial'] = r.middleinitial
             response['surname'] = r.surname
             response['guid'] = r.guid
-            
+
             status = trace.status.Status(trace.StatusCode.OK)
         except Exception:
             e = traceback.format_exc()

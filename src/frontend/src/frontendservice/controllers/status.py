@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import httpx
-from pydantic import BaseModel, Json
+from pydantic import BaseModel
 from fastapi import Request, APIRouter
 
 from frontendservice.config import args

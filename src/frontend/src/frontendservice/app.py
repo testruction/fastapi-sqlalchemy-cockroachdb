@@ -40,7 +40,7 @@ def create_app():
     app.include_router(PostgresPage.router)
 
     postgres_dash_app = create_dash_postgres_app(requests_pathname_prefix='/postgres/',
-                                                   args=args)
+                                                 args=args)
     app.mount("/postgres/",
               WSGIMiddleware(postgres_dash_app.server),
               name='postgres')

@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Numeric, SmallInteger
 
 from backendservice.database import Base
 
+
 class Fakenames(Base):
     __tablename__ = 'fakenames'
     __table_args__ = {'extend_existing': True}

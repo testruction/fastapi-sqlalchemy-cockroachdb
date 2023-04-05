@@ -13,6 +13,7 @@ from backendservice.utils.userid import get_openid_user
 from backendservice.controllers.postgres import FakenamesApis as PostgresApis
 from backendservice.controllers.health import HealthApis
 
+
 def create_app():
     """
     Web application initialization
