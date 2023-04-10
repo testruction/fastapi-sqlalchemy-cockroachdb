@@ -14,7 +14,8 @@ LABEL org.opencontainers.image.vendor="Testruction" \
       org.opencontainers.image.version=${IMAGE_VERSION} \
 	  org.opencontainers.image.title="Banckend Service Demo" \
 	  org.opencontainers.image.description="MVC based FastAPI backend connected to relational database using SqlAlchemy" \
-      org.opencontainers.image.base.name="docker.io/amd64/python:${BASE_IMAGE_TAG}"
+      org.opencontainers.image.base.name="docker.io/amd64/python:${BASE_IMAGE_TAG}" \
+      org.opencontainers.image.source="https://github.com/testruction/fastapi-sqlalchemy-cockroachdb"
 
 USER root
 
