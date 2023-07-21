@@ -6,7 +6,7 @@ source make/libraries/custom-logger.sh -v
 source make/init.sh
 
 pushd src/backend/src/
-python3 tests/populate.py
+python3 tests/populate.py --host localhost
 eok 'Database populated using "tests/unit/fakenames.csv" dataset'
 popd
 
