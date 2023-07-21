@@ -23,6 +23,12 @@ USER root
 RUN groupadd --gid="${OCI_USER_ID}" "${OCI_USER}" \
     && useradd --uid="${OCI_USER_ID}" --gid=${OCI_USER_ID} --system "${OCI_USER}"
 
+RUN apt-get update -y \
+    && apt-get upgrade -y \
+    && apt-get autoremove -y --purge \
+    && apt-get clean \
+    && rm -r /var/lib/apt/lists/*
+
 # Copy app source code
 COPY ./ /usr/local/app/
 WORKDIR /usr/local/app/
