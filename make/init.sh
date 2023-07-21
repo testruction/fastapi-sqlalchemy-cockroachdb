@@ -22,7 +22,7 @@ function init_venv()
 {
     if [ ! -d ${HOME}/micromamba/envs/${PROJECT_NAME} ]
     then
-        micromamba create --name ${PROJECT_NAME} --channel conda-forge python=3.8 --yes
+        micromamba create --name ${PROJECT_NAME} --channel conda-forge python=3.11 --yes
     fi
 
     if ! micromamba env list | grep -E "$PROJECT_NAME\s*\*"
