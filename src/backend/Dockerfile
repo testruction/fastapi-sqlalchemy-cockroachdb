@@ -5,7 +5,7 @@ ARG IMAGE_VERSION
 ARG TZ='America/Montreal'
 ENV TZ="${TZ}"
 ENV APP_VERSION="${IMAGE_VERSION}"
-ENV OCI_USER='runtimeuser'
+ENV OCI_USER='python'
 ENV OCI_USER_ID='1001'
 
 # https://github.com/opencontainers/image-spec/blob/main/annotations.md
