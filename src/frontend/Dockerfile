@@ -12,8 +12,8 @@ ENV OCI_USER_ID='1001'
 LABEL org.opencontainers.image.vendor="Testruction" \
       org.opencontainers.image.authors='Florian JUDITH <florian.judith.b@gmail.com>' \
       org.opencontainers.image.version=${IMAGE_VERSION} \
-	  org.opencontainers.image.title="Frontend Service Demo" \
-	  org.opencontainers.image.description="MVC based FastAPI frontend mixed with Flask/Dash applications connected to the backend Restful API" \
+	    org.opencontainers.image.title="Frontend Service Demo" \
+	    org.opencontainers.image.description="MVC based FastAPI frontend mixed with Flask/Dash applications connected to the backend Restful API" \
       org.opencontainers.image.base.name="docker.io/amd64/python:${BASE_IMAGE_TAG}" \
       org.opencontainers.image.source="https://github.com/testruction/fastapi-sqlalchemy-cockroachdb"
 
@@ -35,11 +35,11 @@ RUN python3 -m pip install --upgrade pip \
 # Startup admission control
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chown -R ${OCI_USER}:${OCI_USER} \
-        /entrypoint.sh \
-        /usr/local/app/ \
+      /entrypoint.sh \
+      /usr/local/app/ \
     && chmod -R a+x \
-        /entrypoint.sh \
-        /usr/local/app/
+      /entrypoint.sh \
+      /usr/local/app/
 
 EXPOSE 8000
 
@@ -48,5 +48,6 @@ USER ${OCI_USER}
 
 WORKDIR /usr/local/app/src
 ENTRYPOINT [ "/entrypoint.sh" ]
+
 # CMD ["uvicorn", "--host=0.0.0.0", "--port=8000", "asgi:app"]
 CMD ["hypercorn", "--bind=0.0.0.0:8000", "asgi:app"]
