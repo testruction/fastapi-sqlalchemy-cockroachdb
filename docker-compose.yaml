@@ -58,9 +58,9 @@ services:
         IMAGE_VERSION: ${VERSION}
     image: oci.local/${PROJECT_NAMESPACE}/${PROJECT_NAME}/backend:${VERSION}
     # command: tail -f /dev/null
-    command: hypercorn --bind 0.0.0.0:8001 asgi:app --reload
+    # command: hypercorn --bind 0.0.0.0:8001 asgi:app --reload
     ports:
-      - "8001:8001"
+      - "8001:8000"
     environment:
       TZ: Canada/Montreal
       # OTLP GRPC
@@ -85,11 +85,11 @@ services:
         IMAGE_VERSION: ${VERSION}
     image: oci.local/${PROJECT_NAMESPACE}/${PROJECT_NAME}/frontend:${VERSION}
     # command: tail -f /dev/null
-    command: hypercorn --bind 0.0.0.0:8000 asgi:app --reload
+    # command: hypercorn --bind 0.0.0.0:8000 asgi:app --reload
     ports:
       - "8000:8000"
     environment:
-      BACKEND_API_URL: http://backend:8001
+      BACKEND_API_URL: http://backend:8000
       TZ: Canada/Montreal
       # OTLP GRPC
       OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://jaeger:4317}

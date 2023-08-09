@@ -17,7 +17,7 @@ parser.add_argument('--backend-api-url',
                     type=str,
                     help='Hostname, fully qualified name or IP address',
                     default=os.environ.get('BACKEND_API_URL',
-                                           default='http://backend:8001'))
+                                           default='http://backend:8000'))
 args, unknown = parser.parse_known_args()
 
 # Initialize logging
