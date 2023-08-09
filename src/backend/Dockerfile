@@ -55,5 +55,5 @@ USER ${OCI_USER}
 WORKDIR /usr/local/app/src
 ENTRYPOINT [ "/entrypoint.sh" ]
 
-# CMD ["uvicorn", "--host=0.0.0.0", "--port=8000", "asgi:app"]
-CMD ["hypercorn", "--bind=0.0.0.0:8000", "asgi:app"]
+CMD ["uvicorn", "--host=0.0.0.0", "--port=8000", "asgi:app"]
+# CMD ["hypercorn", "--bind=0.0.0.0:8000", "asgi:app"]
