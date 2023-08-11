@@ -27,3 +27,7 @@ dependencies:
     condition: jaeger.enabled
     repository: https://jaegertracing.github.io/helm-charts
     version: 0.71.10
+  - name: cockroachdb
+    condition: cockroachdb.enabled
+    repository: https://charts.cockroachdb.com/
+    version: 11.1.5

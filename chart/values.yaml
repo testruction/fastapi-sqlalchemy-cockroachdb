@@ -79,6 +79,13 @@ backend:
   tracing:
     url: null
     insecure: true
+  database:
+    cockroachdb:
+      host: null
+      port: 26257
+      username: root
+      password: dummypassword
+      database: postgres
 frontend:
   replicaCount: 1
   image:
@@ -181,3 +188,9 @@ jaeger:
   extraEnv:
     - name: COLLECTOR_OTLP_ENABLED
       value: true
+cockroachdb:
+  enabled: true
+  init:
+    privisioning: true
+  tls:
+    enabled: false

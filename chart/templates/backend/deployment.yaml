@@ -41,6 +41,27 @@ spec:
             {{- with (concat .Values.frontend.env .Values.frontend.extraEnv )}}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+            - name: COCKROACH_HOST
+              {{- if .Values.cockroachdb.enabled }}
+              value: {{ print .Release.Name "-cockroachdb-public" | quote }}
+              {{- else if eq "" .Values.backend.database.cockroachdb.host }}
+              {{ fail "backend.database.cockroachdb.host can't be empty if cockroachdb.enabled is set to false"}}
+              value: {{ .Values.backend.database.cockroachdb.host | quote }}
+              {{- end }}
+            - name: COCKROACH_PORT
+              value: {{ default "26257" .Values.backend.database.cockroachdb.port | quote }}
+            - name: COCKROACH_DB
+              value: {{ default "postgres" .Values.backend.database.cockroachdb.database | quote }}
+            - name: COCKROACH_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "chart.fullname" . }}-backend
+                  key: username
+            - name: COCKROACH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "chart.fullname" . }}-backend
+                  key: password
           ports:
             - name: http
               containerPort: 8000
