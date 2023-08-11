@@ -1,4 +1,4 @@
-ARG BASE_IMAGE_TAG="3.10-slim"
+ARG BASE_IMAGE_TAG="3.11-slim"
 
 FROM docker.io/amd64/python:${BASE_IMAGE_TAG}
 ARG IMAGE_VERSION
