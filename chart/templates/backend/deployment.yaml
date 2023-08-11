@@ -33,6 +33,14 @@ spec:
             {{- toYaml .Values.backend.securityContext | nindent 12 }}
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          env:
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http{{ if not .Values.backend.tracing.insecure }}s{{ end }}://{{ default "localhost" (print .Release.Name "-jaeger-collector") }}:4317
+            - name: OTEL_EXPORTER_OTLP_INSECURE
+              value: {{ .Values.backend.tracing.insecure | quote }}
+            {{- with (concat .Values.frontend.env .Values.frontend.extraEnv )}}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
           ports:
             - name: http
               containerPort: 8000

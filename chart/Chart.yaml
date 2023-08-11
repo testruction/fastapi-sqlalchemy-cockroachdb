@@ -22,3 +22,8 @@ appVersion: "1.1.1"
 sources:
   - https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
 home: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
+dependencies:
+  - name: jaeger
+    condition: jaeger.enabled
+    repository: https://jaegertracing.github.io/helm-charts
+    version: 0.71.10
