@@ -13,5 +13,6 @@ setup() {
 
 @test "Check frontend UI" {
   curl --retry 3 --fail "http://${FRONTEND_HOST}:${FRONTEND_PORT}/health"
+  curl --retry 3 --fail "http://${FRONTEND_HOST}:${FRONTEND_PORT}/status"
   curl --retry 3 --fail "http://${FRONTEND_HOST}:${FRONTEND_PORT}/"
 }
