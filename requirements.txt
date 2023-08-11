@@ -18,5 +18,7 @@ opentelemetry-instrumentation-dbapi
 opentelemetry-instrumentation-httpx
 opentelemetry-instrumentation-fastapi
 opentelemetry-instrumentation-logging
+python-dotenv
 pytest
 pytest-dotenv
+locust
