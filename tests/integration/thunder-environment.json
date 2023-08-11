@@ -6,7 +6,7 @@
     "variables": [
         {
             "name": "invoke_url",
-            "value": "http://localhost:58001/v1"
+            "value": "http://localhost:8001"
         }
     ]
 }
