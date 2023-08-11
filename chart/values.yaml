@@ -5,7 +5,7 @@
 backend:
   replicaCount: 1
   image:
-    repository: nginx
+    repository: ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/backend
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
@@ -75,7 +75,7 @@ backend:
 frontend:
   replicaCount: 1
   image:
-    repository: nginx
+    repository: ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
