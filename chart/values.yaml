@@ -142,3 +142,7 @@ frontend:
   tolerations: []
   affinity: {}
   enabled: true
+global:
+  serviceAccount:
+    create: true
+    name: ""
