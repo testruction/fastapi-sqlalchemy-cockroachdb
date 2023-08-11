@@ -6,6 +6,8 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.wsgi import WSGIMiddleware
 
+from prometheus_fastapi_instrumentator import Instrumentator
+
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry import trace
 
@@ -45,6 +47,8 @@ def create_app():
               WSGIMiddleware(postgres_dash_app.server),
               name='postgres')
 
+    Instrumentator().instrument(app).expose(app)
+    
     def request_hook(span: trace.get_current_span(), scope: dict):
         if span and span.is_recording():
             span.set_attribute("enduser.id", get_openid_user(Request))
