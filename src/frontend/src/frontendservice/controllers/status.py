@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 
 
 class ApiResponseModel(BaseModel):
-    status_code: str
-    raw: str
-    data: list
+    status_code: int
+    text: str
+    data: object
 
 
 class StatusModel(BaseModel):
@@ -36,12 +36,12 @@ class StatusApis():
         with httpx.Client(trust_env=False) as client:
             rsf = client.get(url=f'{args.backend_api_url}/v1/fakenames/postgres?limit=5',
                              headers=headers)
-            logger.info(rsf.text)
+            # logger.info(rsf.text)
 
             return {
                 'postgres': {
                     'status_code': rsf.status_code,
-                    'raw': rsf.text,
+                    'text': rsf.text,
                     'data': rsf.json()
                 }
             }
