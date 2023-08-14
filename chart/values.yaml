@@ -2,6 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# Backend
 backend:
   replicaCount: 1
   image:
@@ -86,6 +87,8 @@ backend:
       username: root
       password: dummypassword
       database: postgres
+
+# Frontend
 frontend:
   replicaCount: 1
   image:
@@ -167,8 +170,10 @@ global:
   serviceAccount:
     create: true
     name: ""
+
+# Jaeger
 jaeger:
-  enabled: true
+  create: true
   allInOne:
     enabled: true
   ingester:
@@ -188,8 +193,10 @@ jaeger:
   extraEnv:
     - name: COLLECTOR_OTLP_ENABLED
       value: true
+
+# CockroachDB
 cockroachdb:
-  enabled: true
+  create: true
   init:
     privisioning: true
   tls:

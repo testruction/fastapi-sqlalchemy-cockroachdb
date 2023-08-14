@@ -24,10 +24,10 @@ sources:
 home: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
 dependencies:
   - name: jaeger
-    condition: jaeger.enabled
+    condition: jaeger.create
     repository: https://jaegertracing.github.io/helm-charts
     version: 0.71.10
   - name: cockroachdb
-    condition: cockroachdb.enabled
+    condition: cockroachdb.create
     repository: https://charts.cockroachdb.com/
     version: 11.1.5
