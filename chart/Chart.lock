@@ -1,9 +1,0 @@
-dependencies:
-- name: jaeger
-  repository: https://jaegertracing.github.io/helm-charts
-  version: 0.71.10
-- name: cockroachdb
-  repository: https://charts.cockroachdb.com/
-  version: 11.1.5
-digest: sha256:783c3187c159a573ce5b3219c4c63d8ed6e53e0a3d0e8365455cc520bd9a760d
-generated: "2023-08-14T17:16:38.517949889-04:00"
