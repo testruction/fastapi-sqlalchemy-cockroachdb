@@ -27,6 +27,6 @@ spec:
   type: openapi
   lifecycle: production
   owner: testruction.io
-  definition:
-    $text: https://raw.githubusercontent.com/testruction/fastapi-sqlalchemy-cockroachdb/main/specs/openapi.yaml
+  # definition:
+  #   $text: https://raw.githubusercontent.com/testruction/fastapi-sqlalchemy-cockroachdb/main/specs/openapi.yaml
   dependsOn: ['resource:fakenames-db']
