@@ -1,0 +1,33 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: fakenames-db
+  description: Fakenames database generated from https://fakenames.org dataset
+  annotations:
+    backstage.io/kubernetes-id: fastapi-demo
+spec:
+  type: database
+  owner: testruction.io
+  system: fastapi-demo
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: fakenames
+  description: Fake identity provider
+  tags:
+    - testruction.io
+    - rest
+  annotations:
+    backstage.io/kubernetes-id: fastapi-demo
+  # annotations:
+  #   # The annotation is deprecated, we use placeholders (see below) instead, remove it later.
+  #   backstage.io/definition-at-location: 'url:https://raw.githubusercontent.com/APIs-guru/openapi-directory/master/APIs/spotify.com/v1/swagger.yaml'
+spec:
+  type: openapi
+  lifecycle: production
+  owner: testruction.io
+  definition:
+    $text: https://raw.githubusercontent.com/testruction/fastapi-sqlalchemy-cockroachdb/main/specs/openapi.yaml
+  dependsOn: ['resource:fakenames-db']

@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: fastapi-demo
+  description: Demo of a FastAPI frontend/backend application leveraging SqlAlchemy and CoackroachDB
+  annotations:
+    backstage.io/kubernetes-id: fastapi-demo
+spec:
+  targets:
+    - ./src/backend/catalog-info.yaml
+    - ./src/frontend/catalog-info.yaml
