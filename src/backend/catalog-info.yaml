@@ -17,7 +17,6 @@ metadata:
   name: fakenames
   description: Fake identity provider
   tags:
-    - testruction.io
     - rest
   annotations:
     backstage.io/kubernetes-id: fastapi-demo
