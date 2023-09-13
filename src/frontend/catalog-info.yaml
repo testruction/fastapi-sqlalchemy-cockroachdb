@@ -1,0 +1,31 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: fastapi-demo
+  description: FastApi and Dash frontend demonstration
+  tags:
+    - testruction.io
+    - fastapi
+    - dash
+    - python3
+  annotations:
+    backstage.io/kubernetes-id: fastapi-demo
+  links:
+    - url: http://localhost
+      title: Home page
+      icon: home
+      type: admin-dashboard
+    - url: https://metrics.example-org.com
+      title: metrics
+      icon: analytics
+      type: metrics-dashboard
+    - url: https://logs.example-org.com
+      title: logs
+      icon: assignment
+      type: logs-dashboard  
+spec:
+  type: service
+  lifecycle: production
+  owner: users-team
+  system: public-websites
