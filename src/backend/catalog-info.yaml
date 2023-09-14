@@ -8,7 +8,7 @@ metadata:
     backstage.io/kubernetes-id: fastapi-demo
 spec:
   type: database
-  owner: group:testruction.io:python
+  owner: "testruction.io"
   system: fastapi-demo
 ---
 apiVersion: backstage.io/v1alpha1
@@ -28,7 +28,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: group:testruction.io:python
+  owner: "testruction.io"
   system: fastapi-demo
   definition:
     $text: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/main/specs/openapi.yaml
@@ -53,7 +53,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: group:testruction.io:python
+  owner: "testruction.io"
   system: fastapi-demo
   dependsOn:
     - resource:fakenames-db

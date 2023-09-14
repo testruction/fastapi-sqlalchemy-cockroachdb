@@ -27,7 +27,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: group:testruction.io:python
+  owner: "testruction.io"
   system: fastapi-demo
   dependsOn:
     - api:fakenames
