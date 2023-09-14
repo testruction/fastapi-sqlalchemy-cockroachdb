@@ -3,15 +3,16 @@ apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
   name: fakenames-db
-  description: PostgreSQL database populated from https://fakenames.org dataset
-  # annotations:
-  #   backstage.io/kubernetes-id: fastapi-demo
+  description: Cockroach database populated from https://fakenames.org dataset
+  annotations:
+    backstage.io/kubernetes-id: cockroachdb
+    backstage.io/kubernetes-namespace: fastapi-demo
 spec:
   type: database
   owner: "testruction.io"
   system: fastapi-demo
-tags:
-  - postgres
+  tags:
+    - postgres
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
