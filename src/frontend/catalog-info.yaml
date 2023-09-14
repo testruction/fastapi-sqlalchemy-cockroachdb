@@ -30,4 +30,4 @@ spec:
   owner: group:testruction.io:python
   system: fastapi-demo
   dependsOn:
-    - fastapi-demo-api
+    - component:fastapi-demo-api
