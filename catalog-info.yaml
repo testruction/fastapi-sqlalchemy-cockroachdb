@@ -1,4 +1,5 @@
 ---
+# https://backstage.io/docs/features/software-catalog/descriptor-format/#kind-location
 apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
