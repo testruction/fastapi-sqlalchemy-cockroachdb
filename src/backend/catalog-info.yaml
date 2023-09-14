@@ -4,8 +4,8 @@ kind: Resource
 metadata:
   name: fakenames-db
   description: PostgreSQL database populated from https://fakenames.org dataset
-  annotations:
-    backstage.io/kubernetes-id: fastapi-demo
+  # annotations:
+  #   backstage.io/kubernetes-id: fastapi-demo
 spec:
   type: database
   owner: "testruction.io"
