@@ -2,7 +2,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: fastapi-demo
+  name: frontend
   description: FastApi and Dash frontend demonstration
   tags:
     - fastapi
@@ -10,7 +10,8 @@ metadata:
     - python3
     - ui
   annotations:
-    backstage.io/kubernetes-id: fastapi-demo
+    backstage.io/kubernetes-id: frontend
+    backstage.io/kubernetes-namespace: fastapi-demo
   links:
     - url: http://localhost
       title: Home page
@@ -32,4 +33,4 @@ spec:
   consumesApis:
     - api:fakenames
   dependsOn:
-    - component:fastapi-demo-api
+    - component:backend

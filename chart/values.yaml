@@ -21,10 +21,7 @@ backend:
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
     name: ""
-  podAnnotations:
-    app.kubernetes.io/name: backend
-    app.kubernetes.io/instance: fastapi
-    backstage.io/kubernetes-id: fastapi-demo
+  podAnnotations: {}
 
   podSecurityContext: {}
   # fsGroup: 2000
@@ -94,6 +91,9 @@ backend:
 
 # Frontend
 frontend:
+  backstageAnnotations:
+    backstage.io/kubernetes-id: fastapi-demo
+
   replicaCount: 1
   image:
     repository: ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend

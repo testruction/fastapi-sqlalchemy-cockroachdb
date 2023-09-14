@@ -18,10 +18,12 @@ metadata:
   name: {{ $fullName }}-backend
   labels:
     {{- include "chart.labels" . | nindent 4 }}
-  {{- with .Values.backend.ingress.annotations }}
   annotations:
+    backstage.io/kubernetes-id: backend
+    backstage.io/kubernetes-namespace: {{ .Release.Namespace }}
+    {{- with .Values.backend.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
-  {{- end }}
+    {{- end }}
 spec:
   {{- if and .Values.backend.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
   ingressClassName: {{ .Values.backend.ingress.className }}

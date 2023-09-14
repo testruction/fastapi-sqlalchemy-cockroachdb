@@ -23,7 +23,8 @@ metadata:
     - fastapi
     - python3
   annotations:
-    backstage.io/kubernetes-id: fastapi-demo
+    backstage.io/kubernetes-id: backend
+    backstage.io/kubernetes-namespace: fastapi-demo
   # annotations:
   #   # The annotation is deprecated, we use placeholders (see below) instead, remove it later.
   #   backstage.io/definition-at-location: 'url:https://raw.githubusercontent.com/APIs-guru/openapi-directory/master/APIs/spotify.com/v1/swagger.yaml'
@@ -38,15 +39,16 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: fastapi-demo-api
-  description: FastApi and Dash backend API demonstration
+  name: backend
+  description: FastApi backend API demonstration
   tags:
     - fastapi
     - dash
     - python3
     - ui
   annotations:
-    backstage.io/kubernetes-id: fastapi-demo
+    backstage.io/kubernetes-id: backend
+    backstage.io/kubernetes-namespace: fastapi-demo
   links:
     - url: http://localhost/v1/docs
       title: Api documentation
