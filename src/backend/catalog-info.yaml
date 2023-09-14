@@ -19,7 +19,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: group:testruction:python
+  owner: group:testruction.io:python
   system: fastapi-demo
   dependsOn:
     - resource:fakenames-db
@@ -35,7 +35,7 @@ metadata:
     backstage.io/kubernetes-id: fastapi-demo
 spec:
   type: database
-  owner: testruction.io
+  owner: group:testruction.io:python
   system: fastapi-demo
 ---
 apiVersion: backstage.io/v1alpha1
