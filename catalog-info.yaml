@@ -19,4 +19,4 @@ metadata:
   name: "testruction.io"
 spec:
   type: root
-
+  children: []
