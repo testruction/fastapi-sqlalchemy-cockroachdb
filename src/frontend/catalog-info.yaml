@@ -29,5 +29,7 @@ spec:
   lifecycle: production
   owner: "testruction.io"
   system: fastapi-demo
-  dependsOn:
+  consumesApis:
     - api:fakenames
+  dependsOn:
+    - component:fastapi-demo-api
