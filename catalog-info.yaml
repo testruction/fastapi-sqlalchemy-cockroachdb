@@ -15,7 +15,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
-  name: testruction.io
+  name: "testruction.io"
 spec:
   type: root
   children:
