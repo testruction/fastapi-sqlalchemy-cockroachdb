@@ -29,3 +29,5 @@ spec:
   lifecycle: production
   owner: group:testruction:python
   system: fastapi-demo
+  dependsOn:
+    - fastapi-demo-api
