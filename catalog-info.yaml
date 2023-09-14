@@ -1,3 +1,4 @@
+---
 apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
@@ -9,3 +10,22 @@ spec:
   targets:
     - ./src/backend/catalog-info.yaml
     - ./src/frontend/catalog-info.yaml
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: testruction.io
+spec:
+  type: root
+  children:
+    - python
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: python
+spec:
+  type: business-unit
+  children: []
