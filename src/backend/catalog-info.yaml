@@ -29,6 +29,7 @@ spec:
   type: openapi
   lifecycle: production
   owner: group:testruction.io:python
+  system: fastapi-demo
   definition:
     $text: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/main/specs/openapi.yaml
 ---
