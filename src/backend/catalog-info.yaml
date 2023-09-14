@@ -1,5 +1,32 @@
 ---
 apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: fastapi-demo-api
+  description: FastApi and Dash backend API demonstration
+  tags:
+    - fastapi
+    - dash
+    - python3
+    - ui
+  annotations:
+    backstage.io/kubernetes-id: fastapi-demo
+  links:
+    - url: http://localhost/v1/docs
+      title: Api documentation
+      icon: docs
+      type: apidocs
+spec:
+  type: service
+  lifecycle: production
+  owner: group:testruction:python
+  system: fastapi-demo
+  dependsOn:
+    - resource:fakenames-db
+  providesApis:
+    - fakenames
+---
+apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
   name: fakenames-db
@@ -31,4 +58,3 @@ spec:
   owner: group:testruction.io:python
   definition:
     $text: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/main/specs/openapi.yaml
-  dependsOn: ['resource:fakenames-db']
