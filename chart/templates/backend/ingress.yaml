@@ -18,7 +18,7 @@ metadata:
   name: {{ $fullName }}-backend
   labels:
     {{- include "chart.labels" . | nindent 4 }}
-    {{- with .Values.backend.extraLabels}}
+    {{- with .Values.backend.extraLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
   {{- with .Values.backend.ingress.annotations }}

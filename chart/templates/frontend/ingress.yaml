@@ -18,7 +18,7 @@ metadata:
   name: {{ $fullName }}-frontend
   labels:
     {{- include "chart.labels" . | nindent 4 }}
-    {{- with .Values.frontend.extraLabels}}
+    {{- with .Values.frontend.extraLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
   {{- with .Values.frontend.ingress.annotations }}

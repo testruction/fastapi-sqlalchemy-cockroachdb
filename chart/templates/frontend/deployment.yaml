@@ -4,7 +4,7 @@ metadata:
   name: {{ include "chart.fullname" . }}-frontend
   labels:
     {{- include "chart.labels" . | nindent 4 }}
-    {{- with .Values.frontend.extraLabels}}
+    {{- with .Values.frontend.extraLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
@@ -22,7 +22,7 @@ spec:
       {{- end }}
       labels:
         {{- include "chart.selectorLabels" . | nindent 8 }}
-        {{- with .Values.frontend.extraLabels}}
+        {{- with .Values.frontend.extraLabels }}
           {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
