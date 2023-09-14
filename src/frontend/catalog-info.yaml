@@ -8,6 +8,7 @@ metadata:
     - fastapi
     - dash
     - python3
+    - ui
   annotations:
     backstage.io/kubernetes-id: fastapi-demo
   links:
@@ -26,5 +27,5 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: users-team
-  system: public-websites
+  owner: group:testruction:python
+  system: fastapi-demo

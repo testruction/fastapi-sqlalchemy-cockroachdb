@@ -18,6 +18,8 @@ metadata:
   description: Fake identity provider
   tags:
     - rest
+    - fastapi
+    - python3
   annotations:
     backstage.io/kubernetes-id: fastapi-demo
   # annotations:
@@ -26,7 +28,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: testruction.io
+  owner: group:testruction.io:python
   definition:
     $text: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/main/specs/openapi.yaml
   dependsOn: ['resource:fakenames-db']
