@@ -170,12 +170,13 @@ frontend:
   tracing:
     url: null
     insecure: true
+  extraLabels:
+    backstage.io/kubernetes-id: frontend
+
 global:
   serviceAccount:
     create: true
     name: ""
-  extraLabels:
-    backstage.io/kubernetes-id: frontend
 
 # Jaeger
 jaeger:
