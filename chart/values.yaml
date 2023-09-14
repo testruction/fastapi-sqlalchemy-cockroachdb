@@ -88,12 +88,11 @@ backend:
       username: root
       password: dummypassword
       database: postgres
+  extraLabels:
+    backstage.io/kubernetes-id: backend
 
 # Frontend
 frontend:
-  backstageAnnotations:
-    backstage.io/kubernetes-id: fastapi-demo
-
   replicaCount: 1
   image:
     repository: ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend
@@ -111,10 +110,7 @@ frontend:
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
     name: ""
-  podAnnotations:
-    app.kubernetes.io/name: frontend
-    app.kubernetes.io/instance: fastapi
-    backstage.io/kubernetes-id: fastapi-demo
+  podAnnotations: {}
 
   podSecurityContext: {}
   # fsGroup: 2000
@@ -178,6 +174,8 @@ global:
   serviceAccount:
     create: true
     name: ""
+  extraLabels:
+    backstage.io/kubernetes-id: frontend
 
 # Jaeger
 jaeger:

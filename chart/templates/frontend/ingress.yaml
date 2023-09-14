@@ -18,12 +18,13 @@ metadata:
   name: {{ $fullName }}-frontend
   labels:
     {{- include "chart.labels" . | nindent 4 }}
-  annotations:
-    backstage.io/kubernetes-id: frontend
-    backstage.io/kubernetes-namespace: {{ .Release.Namespace }}
-    {{- with .Values.frontend.ingress.annotations }}
-    {{- toYaml . | nindent 4 }}
+    {{- with .Values.frontend.extraLabels}}
+      {{- toYaml . | nindent 4 }}
     {{- end }}
+  {{- with .Values.frontend.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   {{- if and .Values.frontend.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
   ingressClassName: {{ .Values.frontend.ingress.className }}
