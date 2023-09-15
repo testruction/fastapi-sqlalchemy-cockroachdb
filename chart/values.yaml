@@ -205,6 +205,7 @@ jaeger:
 cockroachdb:
   create: true
   init:
-    privisioning: true
+    privisioning:
+      enabled: true
   tls:
     enabled: false
