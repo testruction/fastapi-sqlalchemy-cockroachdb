@@ -89,9 +89,15 @@ backend:
       password: dummypassword
       database: postgres
   extraLabels:
+    app.kubernetes.io/component: backend
     backstage.io/kubernetes-id: backend
   serviceMonitor:
     enabled: true
+    labels: {}
+    annotations: {}
+    interval: 10s
+    # scrapeTimeout: 10s
+    # Limits the ServiceMonitor to the current namespace if set to `true`.
     namespaced: true
 
 # Frontend
@@ -174,9 +180,15 @@ frontend:
     url: null
     insecure: true
   extraLabels:
+    app.kubernetes.io/component: frontend
     backstage.io/kubernetes-id: frontend
   serviceMonitor:
     enabled: true
+    labels: {}
+    annotations: {}
+    interval: 10s
+    # scrapeTimeout: 10s
+    # Limits the ServiceMonitor to the current namespace if set to `true`.
     namespaced: true
 
 global:
