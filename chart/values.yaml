@@ -90,6 +90,9 @@ backend:
       database: postgres
   extraLabels:
     backstage.io/kubernetes-id: backend
+  serviceMonitor:
+    enabled: true
+    namespaced: true
 
 # Frontend
 frontend:
@@ -172,6 +175,9 @@ frontend:
     insecure: true
   extraLabels:
     backstage.io/kubernetes-id: frontend
+  serviceMonitor:
+    enabled: true
+    namespaced: true
 
 global:
   serviceAccount:
