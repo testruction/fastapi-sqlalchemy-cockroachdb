@@ -91,7 +91,7 @@ backend:
   extraLabels:
     backstage.io/kubernetes-id: backend
   serviceMonitor:
-    enabled: true
+    enabled: false
     labels: {}
     annotations: {}
     interval: 10s
@@ -181,7 +181,7 @@ frontend:
   extraLabels:
     backstage.io/kubernetes-id: frontend
   serviceMonitor:
-    enabled: true
+    enabled: false
     labels: {}
     annotations: {}
     interval: 10s
