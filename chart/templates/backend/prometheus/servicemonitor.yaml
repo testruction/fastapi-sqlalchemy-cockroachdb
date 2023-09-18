@@ -8,6 +8,7 @@ metadata:
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: backend
     {{- with .Values.backend.extraLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
@@ -27,12 +28,12 @@ spec:
       {{- include "chart.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: backend
   namespaceSelector:
-    {{- if $serviceMonitor.namespaced }}
+  {{- if $serviceMonitor.namespaced }}
     matchNames:
       - {{ .Release.Namespace }}
-    {{- else }}
+  {{- else }}
     any: true
-    {{- end }}
+  {{- end }}
   endpoints:
   - port: {{ $port | quote }}
     path: /metrics

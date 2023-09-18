@@ -18,6 +18,7 @@ metadata:
   name: {{ $fullName }}-frontend
   labels:
     {{- include "chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: frontend
     {{- with .Values.frontend.extraLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}

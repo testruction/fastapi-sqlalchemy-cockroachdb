@@ -4,14 +4,11 @@ metadata:
   name: {{ include "chart.fullname" . }}-backend
   labels:
     {{- include "chart.labels" . | nindent 4 }}
+    app.kubernetes.io/component: backend
     {{- with .Values.backend.extraLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
-  selector:
-    app.kubernetes.io/name: {{ include "chart.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/component: backend
   type: {{ .Values.backend.service.type }}
   ports:
     - port: {{ .Values.backend.service.port }}
