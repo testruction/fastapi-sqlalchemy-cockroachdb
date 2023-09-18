@@ -43,7 +43,6 @@ spec:
           image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
           env:
-
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
               value: http{{ if not .Values.frontend.tracing.insecure }}s{{ end }}://{{ default "localhost" (print .Release.Name "-jaeger-collector") }}:4317
             - name: OTEL_EXPORTER_OTLP_INSECURE
