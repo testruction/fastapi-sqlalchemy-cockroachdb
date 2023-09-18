@@ -24,8 +24,9 @@ metadata:
 spec:
   selector:
     matchLabels:
+      {{- include "chart.labels" . | nindent 6 }}
       {{- with .Values.backend.extraLabels }}
-        {{- toYaml . | nindent 6 }}
+      {{- toYaml . | nindent 6 }}
       {{- end }}
   namespaceSelector:
     {{- if $serviceMonitor.namespaced }}

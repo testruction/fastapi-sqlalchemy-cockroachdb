@@ -8,6 +8,10 @@ metadata:
       {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
+  selector:
+    app.kubernetes.io/name: {{ include "chart.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: backend
   type: {{ .Values.backend.service.type }}
   ports:
     - port: {{ .Values.backend.service.port }}
