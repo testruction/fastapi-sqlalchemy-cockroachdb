@@ -20,3 +20,4 @@ spec:
       name: http
   selector:
     {{- include "chart.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: backend

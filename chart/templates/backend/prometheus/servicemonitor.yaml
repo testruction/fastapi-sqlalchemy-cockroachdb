@@ -24,10 +24,8 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- include "chart.labels" . | nindent 6 }}
-      {{- with .Values.backend.extraLabels }}
-      {{- toYaml . | nindent 6 }}
-      {{- end }}
+      {{- include "chart.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: backend
   namespaceSelector:
     {{- if $serviceMonitor.namespaced }}
     matchNames:

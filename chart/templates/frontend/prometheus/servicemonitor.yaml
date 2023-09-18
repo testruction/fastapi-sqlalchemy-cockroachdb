@@ -24,8 +24,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "chart.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- include "chart.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: frontend
   namespaceSelector:
     {{- if $serviceMonitor.namespaced }}
