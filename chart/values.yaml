@@ -89,7 +89,6 @@ backend:
       password: dummypassword
       database: postgres
   extraLabels:
-    app.kubernetes.io/component: backend
     backstage.io/kubernetes-id: backend
   serviceMonitor:
     enabled: false

@@ -35,7 +35,8 @@ spec:
     any: true
   {{- end }}
   endpoints:
-  - port: {{ $port | quote }}
+  - port: http
+  # - targetPort: http
     path: /metrics
     {{- if $serviceMonitor.interval }}
     interval: {{ $serviceMonitor.interval }}
