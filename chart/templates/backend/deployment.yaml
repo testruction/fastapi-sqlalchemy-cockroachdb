@@ -46,9 +46,12 @@ spec:
               value: http{{ if not .Values.backend.tracing.insecure }}s{{ end }}://{{ default "localhost" (print .Release.Name "-jaeger-collector") }}:4317
             - name: OTEL_EXPORTER_OTLP_INSECURE
               value: {{ .Values.backend.tracing.insecure | quote }}
+            - name: DATABASE_ENGINE
+              value: {{ .Values.backend.database.engine | quote }}
             {{- with (concat .Values.frontend.env .Values.frontend.extraEnv )}}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+            {{- if eq "cockroachdb" .Values.backend.database.engine }}
             - name: COCKROACH_HOST
               {{- if .Values.cockroachdb.create }}
               value: {{ print .Release.Name "-cockroachdb-public" | quote }}
@@ -70,6 +73,7 @@ spec:
                 secretKeyRef:
                   name: {{ include "chart.fullname" . }}-backend
                   key: password
+            {{- end }}
           ports:
             - name: http
               containerPort: 8000

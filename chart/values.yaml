@@ -82,6 +82,7 @@ backend:
     url: null
     insecure: true
   database:
+    engine: cockroachdb
     cockroachdb:
       host: null
       port: 26257
@@ -98,6 +99,7 @@ backend:
     # scrapeTimeout: 10s
     # Limits the ServiceMonitor to the current namespace if set to `true`.
     namespaced: true
+
 
 # Frontend
 frontend:
@@ -196,7 +198,7 @@ global:
 
 # Jaeger
 jaeger:
-  create: true
+  create: false
   allInOne:
     enabled: true
   ingester:
@@ -219,7 +221,7 @@ jaeger:
 
 # CockroachDB
 cockroachdb:
-  create: true
+  create: false
   init:
     privisioning:
       enabled: true
