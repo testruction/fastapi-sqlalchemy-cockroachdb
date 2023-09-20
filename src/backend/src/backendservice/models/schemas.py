@@ -24,7 +24,7 @@ class FakenamesBase(BaseModel):
     telephonenumber: str
     telephonecountrycode: int
     mothersmaiden: str
-    birthday: datetime.datetime
+    birthday: datetime.date
     age: int
     tropicalzodiac: str
     cctype: str
