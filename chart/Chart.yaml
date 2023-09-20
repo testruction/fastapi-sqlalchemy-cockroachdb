@@ -1,6 +1,7 @@
 apiVersion: v2
 name: fastapi
-description: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
+description: FastApi demo based on MVC.
+home: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
