@@ -66,11 +66,11 @@ services:
       # OTLP GRPC
       OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://jaeger:4317}
       OTEL_EXPORTER_OTLP_INSECURE: ${OTEL_EXPORTER_OTLP_INSECURE:-true}
-      # Snowflake
+      # CockroachDB
       COCKROACH_HOST: ${COCKROACH_HOST:-database-lb}
       COCKROACH_USER: ${COCKROACH_USER:-root}
       COCKROACH_PASSWORD: ${COCKROACH_PASSWORD:-password}
-      COCKROACH_PORT: ${COCKROACH_PORT:-26257}
+      COCKROACH_PORT: 26257
     links:
       - jaeger
       - database-lb
