@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source make/libraries/custom-logger.sh -v
+source hack/libraries/custom-logger.sh -v
 
 function init_env()
 {
@@ -35,7 +35,7 @@ function init_venv()
 
     python3 -m pip install --upgrade pip --quiet
     pip3 install --upgrade -r requirements.txt --quiet
-    
+
     eok 'Python virtual environment initialized'
 }
 

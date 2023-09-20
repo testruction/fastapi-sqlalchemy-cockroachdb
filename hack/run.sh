@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source make/libraries/custom-logger.sh -v
+source hack/libraries/custom-logger.sh -v
 
-source make/init.sh
+source hack/init.sh
 
-pushd src/backend/src/
-python3 tests/populate.py --host localhost
+hack/populate-docker.sh
 eok 'Database populated using "tests/unit/fakenames.csv" dataset'
-popd
 
 # export DOCKER_BUILDKIT=1
 # docker compose up --build  --remove-orphans

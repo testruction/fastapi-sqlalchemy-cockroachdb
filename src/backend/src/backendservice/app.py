@@ -10,7 +10,7 @@ from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from backendservice.utils.userid import get_openid_user
 
 # Models (required for initial table creation)
-from backendservice.models.postgres import models
+from backendservice.models import postgres
 from backendservice.database import engine
 # Controlers
 from backendservice.controllers.postgres import FakenamesApis as PostgresApis
@@ -21,7 +21,7 @@ def create_app():
     """
     Web application initialization
     """
-    models.Base.metadata.create_all(engine)
+    postgres.Base.metadata.create_all(engine)
 
     app = FastAPI(docs_url="/v1/docs",
                   openapi_url="/v1/openapi.json")

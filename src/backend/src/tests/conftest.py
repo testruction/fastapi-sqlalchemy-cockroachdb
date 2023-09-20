@@ -5,12 +5,12 @@ import csv
 import itertools
 
 from contextlib import closing
-    
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from backendservice.config import DevelopmentConfig
-from backendservice.models.postgres import models
+from backendservice.models import postgres
 
 logger = logging.getLogger(__name__)
 
@@ -26,9 +26,9 @@ def engine():
 @pytest.fixture(scope="session")
 def tables(engine):
 
-    models.Base.metadata.create_all(engine)
+    postgres.Base.metadata.create_all(engine)
     yield
-    models.Base.metadata.drop_all(engine)
+    postgres.Base.metadata.drop_all(engine)
 
 
 @pytest.fixture(scope="session")
@@ -48,7 +48,7 @@ def dbsession(engine, tables):
             reader = csv.DictReader(lower_first(f))
 
             for row in reader:
-                session.add(models.Fakenames(**row))
+                session.add(postgres.Fakenames(**row))
         session.commit()
 
     yield session

@@ -10,7 +10,7 @@ import csv
 from contextlib import closing
 
 from backendservice.database import SessionLocal, engine
-from backendservice.models.postgres import models
+from backendservice.models import postgres
 
 logger = logging.getLogger(__name__)
 logging.getLogger('sqlalchemy.engine').setLevel(logging.ERROR)
@@ -24,13 +24,13 @@ def lower_first(iterator):
 
 
 with SessionLocal() as session:
-    models.Base.metadata.drop_all(bind=engine)
-    models.Base.metadata.create_all(bind=engine)
+    postgres.Base.metadata.drop_all(bind=engine)
+    postgres.Base.metadata.create_all(bind=engine)
 
     with closing(open(dataset, encoding='utf-8-sig')) as f:
         reader = csv.DictReader(lower_first(f))
         for row in reader:
-            data = models.Fakenames(**row)
+            data = postgres.Fakenames(**row)
 
             session.add(data)
     session.commit()

@@ -2,8 +2,7 @@ import traceback
 import logging
 
 from sqlalchemy.orm import Session
-
-from backendservice.models.postgres import models, schemas
+from backendservice.models import postgres, schemas
 
 from fastapi import Request
 from backendservice.utils.userid import get_openid_user
@@ -22,7 +21,7 @@ def create(db: Session, identity: schemas.FakenamesCreate):
         span.set_attributes({'enduser.id': get_openid_user(Request)})
 
         try:
-            response = models.Fakenames(**identity.dict())
+            response = postgres.Fakenames(**identity.dict())
             guid = identity.guid
             db.add(response)
             db.commit()
@@ -48,7 +47,7 @@ def read_all(db: Session, skip: int = 0, limit: int = 100):
     with tracer.start_as_current_span(name='read_all') as span:
         span.set_attributes({'enduser.id': get_openid_user(Request)})
         try:
-            response = db.query(models.Fakenames).offset(skip).limit(limit).all()
+            response = db.query(postgres.Fakenames).offset(skip).limit(limit).all()
 
             status = trace.status.Status(trace.StatusCode.OK)
         except Exception:
@@ -70,7 +69,7 @@ def read(db: Session, guid: str):
         span.set_attributes({'fakenames.guid': guid})
 
         try:
-            response = db.query(models.Fakenames).filter(models.Fakenames.guid == guid).first()
+            response = db.query(postgres.Fakenames).filter(postgres.Fakenames.guid == guid).first()
 
             status = trace.status.Status(trace.StatusCode.OK)
         except Exception:
@@ -92,7 +91,7 @@ def update(db: Session, identity: schemas.FakenamesCreate) -> bool:
         span.set_attributes({'enduser.id': get_openid_user(Request)})
 
         try:
-            response = models.Fakenames(**identity.dict())
+            response = postgres.Fakenames(**identity.dict())
             guid = response.guid
             db.merge(response)
             db.commit()
@@ -124,8 +123,8 @@ def delete(db: Session, guid: str) -> bool:
         span.set_attributes({'enduser.id': get_openid_user(Request)})
 
         try:
-            r = db.query(models.Fakenames).filter(models.Fakenames.guid == guid).first()
-            db.query(models.Fakenames).filter(models.Fakenames.guid == guid).delete()
+            r = db.query(postgres.Fakenames).filter(postgres.Fakenames.guid == guid).first()
+            db.query(postgres.Fakenames).filter(postgres.Fakenames.guid == guid).delete()
             db.commit()
 
             response['deleted'] = True

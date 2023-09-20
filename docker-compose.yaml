@@ -60,7 +60,7 @@ services:
     # command: tail -f /dev/null
     # command: hypercorn --bind 0.0.0.0:8001 asgi:app --reload
     ports:
-      - "8001:8000"
+      - "48180:8000"
     environment:
       TZ: Canada/Montreal
       # OTLP GRPC
@@ -87,7 +87,7 @@ services:
     # command: tail -f /dev/null
     # command: hypercorn --bind 0.0.0.0:8000 asgi:app --reload
     ports:
-      - "8000:8000"
+      - "48080:8000"
     environment:
       BACKEND_API_URL: http://backend:8000
       TZ: Canada/Montreal

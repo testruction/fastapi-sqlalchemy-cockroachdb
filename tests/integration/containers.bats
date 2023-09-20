@@ -9,7 +9,7 @@ setup() {
 @test "Check backend API" {
   curl --retry 3 --fail "http://${BACKEND_HOST}:${BACKEND_PORT}/health"
   curl --retry 3 --fail "http://${BACKEND_HOST}:${BACKEND_PORT}/metrics"
-  curl --retry 3 --fail "http://${BACKEND_HOST}:${BACKEND_PORT}/v1/fakenames/postgres?limit=5"
+  curl --retry 3 --fail "http://${BACKEND_HOST}:${BACKEND_PORT}/v1/fakenames?limit=5"
 }
 
 @test "Check frontend UI" {

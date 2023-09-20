@@ -9,8 +9,9 @@ import itertools
 from datetime import datetime
 
 from contextlib import closing
+from backendservice.models import crud
 
-from backendservice.models.postgres import crud, schemas
+from backendservice.models import schemas
 
 logger = logging.getLogger(__name__)
 # for logger_name in [__name__, 'sqlalchemy.engine']:
@@ -37,7 +38,7 @@ def test_model_create(dbsession):
 
         # Generate new guid to avoir "existing" error
         payload['guid'] = str(hashlib.sha1(str(uuid.uuid4()).encode('utf-8')).hexdigest()[:35])
-        
+
         logger.info(f'''
                 action:    "create"
                 number:    "{payload['number']}"

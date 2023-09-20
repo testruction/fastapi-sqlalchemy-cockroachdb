@@ -21,7 +21,7 @@ from frontendservice.controllers.status import StatusApis
 # Views
 from frontendservice.views.index import IndexPage
 from frontendservice.views.oauth import OauthPage
-from frontendservice.views.postgres import PostgresPage
+from frontendservice.views.fakenames import PostgresPage
 from frontendservice.views.dashboards.postgres import create_dash_app as create_dash_postgres_app
 
 
@@ -41,14 +41,14 @@ def create_app():
     app.include_router(OauthPage.router)
     app.include_router(PostgresPage.router)
 
-    postgres_dash_app = create_dash_postgres_app(requests_pathname_prefix='/postgres/',
+    postgres_dash_app = create_dash_postgres_app(requests_pathname_prefix='/fakenames/',
                                                  args=args)
-    app.mount("/postgres/",
+    app.mount("/fakenames/",
               WSGIMiddleware(postgres_dash_app.server),
               name='postgres')
 
     Instrumentator().instrument(app).expose(app)
-    
+
     def request_hook(span: trace.get_current_span(), scope: dict):
         if span and span.is_recording():
             span.set_attribute("enduser.id", get_openid_user(Request))

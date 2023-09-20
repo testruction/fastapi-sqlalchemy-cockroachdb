@@ -35,7 +35,7 @@ def create_dash_app(requests_pathname_prefix: str, args: object) -> dash.Dash:
                'Content-Type': 'application/json'}
 
     with httpx.Client(trust_env=False) as client:
-        r = client.get(url=f'{args.backend_api_url}/v1/fakenames/postgres',
+        r = client.get(url=f'{args.backend_api_url}/v1/fakenames',
                        headers=headers)
         logger.debug(r.text)
         df = pd.DataFrame.from_dict(r.json())

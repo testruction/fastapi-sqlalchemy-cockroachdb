@@ -17,9 +17,9 @@ class PostgresPage():
     router = APIRouter()
 
     # Dashboard
-    @router.get('/postgres', response_class=HTMLResponse, include_in_schema=False, status_code=200)
+    @router.get('/fakenames', response_class=HTMLResponse, include_in_schema=False, status_code=200)
     def dashboard(request: Request):
         return TEMPLATES.TemplateResponse(name='postgres.html.jinja',
                                           context={'request': request,
                                                    'title': 'frontend service: Postgres',
-                                                   'dash_url': '/postgres/'})
+                                                   'dash_url': '/fakenames/'})

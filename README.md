@@ -48,7 +48,7 @@ micromamba activate ${PROJECT_NAME}
 |-- deploy
 |   |-- envoy               # Envoy Proxy manifests
 |-- docs                    # Documentation
-|-- make                    # local execution scripts
+|-- hack                    # local execution scripts
 |-- specs                   # Open API definitions
 |-- src
 |   |-- backend             # "backendservice" source code
@@ -64,10 +64,10 @@ micromamba activate ${PROJECT_NAME}
 
 ### Exécution des scripts
 
-The [make](./make/) contains scripts to managed the application lifecyle from the developer workstation.
+The [hack](./hack/) contains scripts to managed the application lifecyle from the developer workstation.
 
-* [make/init.sh](./make/init.sh) Initialze the development environment (i.e. Environment variable, Python environment, etc.)
-* [make/run.sh](./make/run.sh) Build and locally executes the containerized using Docker Compose
+* [hack/init.sh](./hack/init.sh) Initialze the development environment (i.e. Environment variable, Python environment, etc.)
+* [hack/run.sh](./hack/run.sh) Build and locally executes the containerized using Docker Compose
 
 ## Tests
 
@@ -81,7 +81,7 @@ Two type of tests can be executed:
 Run the following command to start the Docker Compose environment.
 
 ```bash
-make/run.sh
+hack/run.sh
 ```
 
 From a second terminal session, run the following command to start and interactive session in the `backend` container.
@@ -112,7 +112,7 @@ Unit tests are using a SqlAlchemy fixed that load/unload the data in the databas
 Run the following command to populate
 
 ```bash
-make/run.sh
+hack/run.sh
 ```
 
 ```bash

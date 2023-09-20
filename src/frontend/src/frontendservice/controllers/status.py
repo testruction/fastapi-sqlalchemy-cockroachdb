@@ -34,7 +34,7 @@ class StatusApis():
                    'X-Amzn-Oidc-Data': id_token}
 
         with httpx.Client(trust_env=False) as client:
-            rsf = client.get(url=f'{args.backend_api_url}/v1/fakenames/postgres?limit=5',
+            rsf = client.get(url=f'{args.backend_api_url}/v1/fakenames?limit=5',
                              headers=headers)
             # logger.info(rsf.text)
 
