@@ -82,7 +82,7 @@ backend:
     url: null
     insecure: true
   database:
-    engine: cockroachdb
+    engine: sqlite
     cockroachdb:
       host: null
       port: 26257
