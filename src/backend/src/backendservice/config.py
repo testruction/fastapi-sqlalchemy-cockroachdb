@@ -14,6 +14,10 @@ parser.add_argument('--debug',
 parser.add_argument('--trace-stdout',
                     help="Show OpenTelemetry output to console",
                     action="store_true")
+parser.add_argument('--database-engine',
+                    type=str,
+                    help='Database engine (cockroachdb, postgres, sqlite)',
+                    default=os.environ.get('DATABASE_ENGINE', default='cockroachdb'))
 parser.add_argument('--database-host',
                     type=str,
                     help='Hostname, fully qualified name or IP address',
@@ -47,12 +51,17 @@ class Config(object):
     CSRF_NABLED = True
     SITE_NAME = 'app'
     SECRET_KEY = os.urandom(32)
-    SQLALCHEMY_DATABASE_URI = URL.create(drivername='cockroachdb',
-                                         username=args.database_username,
-                                         password=args.database_password,
-                                         host=args.database_host,
-                                         port=args.database_port,
-                                         database=args.database)
+
+    if args.database_engine == 'sqlite':
+        SQLALCHEMY_DATABASE_URI = "sqlite:///./sqlite.db"
+    elif args.database_engine == 'cockroachdb':
+        SQLALCHEMY_DATABASE_URI = URL.create(drivername='cockroachdb',
+                                             username=args.database_username,
+                                             password=args.database_password,
+                                             host=args.database_host,
+                                             port=args.database_port,
+                                             database=args.database)
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
