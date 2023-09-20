@@ -7,6 +7,7 @@ from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProces
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 
 from opentelemetry.instrumentation.psycopg2 import Psycopg2Instrumentor
+from opentelemetry.instrumentation.sqlite3 import SQLite3Instrumentor
 
 
 def init_tracer(args):
@@ -30,4 +31,7 @@ def init_tracer(args):
         trace.get_tracer_provider().add_span_processor(
             SimpleSpanProcessor(ConsoleSpanExporter()))
 
-    Psycopg2Instrumentor().instrument(enable_commenter=False, skip_dep_check=True)
+    if args.database_engine == "sqlite":
+        SQLite3Instrumentor().instrument()
+    elif args.database_engine == "cockroachdb":
+        Psycopg2Instrumentor().instrument(enable_commenter=False, skip_dep_check=True)
