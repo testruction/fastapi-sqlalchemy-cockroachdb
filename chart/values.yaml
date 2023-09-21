@@ -2,6 +2,12 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+owner: "testruction.io"
+repository:
+  slug: testruction/fastapi-sqlalchemy-cockroachdb
+slo:
+  availabilityRate: 99.5
+
 # Backend
 backend:
   replicaCount: 1

@@ -1,0 +1,252 @@
+{{- $fullName := include "chart.fullname" . -}}
+{{- $serviceName := print $fullName "-frontend" -}}
+{{- $availabilitySloInvertPercentage := subf 1 (divf .Values.slo.availabilityRate 100) -}}
+{{- $availabilitySuccessSloInvert := subf 1 $availabilitySloInvertPercentage -}}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: prometheus
+    {{- include "chart.labels" . | nindent 4 }}
+  name: {{ $serviceName }}-slo
+spec:
+    groups:
+    - name: sloth-slo-sli-recordings-{{ $serviceName }}-requests-availability
+      rules:
+        - record: slo:sli_error:ratio_rate5m
+          expr: |
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[5m:])) OR on() vector(0))
+            /
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[5m:])))
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+            sloth_window: 5m
+        - record: slo:sli_error:ratio_rate30m
+          expr: |
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[30m:])) OR on() vector(0))
+            /
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[30m:])))
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+            sloth_window: 30m
+        - record: slo:sli_error:ratio_rate1h
+          expr: |
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[1h:])) OR on() vector(0))
+            /
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[1h:])))
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+            sloth_window: 1h
+        - record: slo:sli_error:ratio_rate2h
+          expr: |
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[2h:])) OR on() vector(0))
+            /
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[2h:])))
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+            sloth_window: 2h
+        - record: slo:sli_error:ratio_rate6h
+          expr: |
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[6h:])) OR on() vector(0))
+            /
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[6h:])))
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+            sloth_window: 6h
+        - record: slo:sli_error:ratio_rate1d
+          expr: |
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[1d:])) OR on() vector(0))
+            /
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[1d:])))
+          labels:
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+            sloth_window: 1d
+            category: availability
+            component: {{ $serviceName }}
+        - record: slo:sli_error:ratio_rate3d
+          expr: |
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[3d:])) OR on() vector(0))
+            /
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[3d:])))
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+            sloth_window: 3d
+        - record: slo:sli_error:ratio_rate30d
+          expr: |
+            sum_over_time(slo:sli_error:ratio_rate5m{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"}[30d])
+            / ignoring (sloth_window)
+            count_over_time(slo:sli_error:ratio_rate5m{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"}[30d])
+          labels:
+            sloth_window: 30d
+    - name: sloth-slo-meta-recordings-{{ $serviceName }}-requests-availability
+      rules:
+        - record: slo:objective:ratio
+          expr: vector({{ $availabilitySuccessSloInvert }})
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+        - record: slo:error_budget:ratio
+          expr: vector(1-{{ $availabilitySuccessSloInvert }})
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+        - record: slo:time_period:days
+          expr: vector(30)
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+        - record: slo:current_burn_rate:ratio
+          expr: |
+            slo:sli_error:ratio_rate5m{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"}
+            / on(sloth_id, sloth_slo, sloth_service) group_left
+            slo:error_budget:ratio{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"}
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+        - record: slo:period_burn_rate:ratio
+          expr: |
+            slo:sli_error:ratio_rate30d{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"}
+            / on(sloth_id, sloth_slo, sloth_service) group_left
+            slo:error_budget:ratio{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"}
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+        - record: slo:period_error_budget_remaining:ratio
+          expr: 1 - slo:period_burn_rate:ratio{sloth_id="{{ $serviceName }}-requests-availability",
+            sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"}
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+        - record: sloth_slo_info
+          expr: vector(1)
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            repo: {{ .Values.repository.slug }}
+            sloth_id: {{ $serviceName }}-requests-availability
+            sloth_mode: cli-gen-prom
+            sloth_objective: {{ .Values.slo.availabilityRate }}
+            sloth_service: {{ $serviceName }}
+            sloth_slo: requests-availability
+            sloth_spec: prometheus/v1
+            sloth_version: v0.10.0
+    - name: sloth-slo-alerts-{{ $serviceName }}-requests-availability
+      rules:
+        - alert: {{ $serviceName }}HighErrorRate
+          expr: |
+            (
+                (slo:sli_error:ratio_rate5m{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"} > (14.4 * {{ $availabilitySloInvertPercentage }}))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate1h{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"} > (14.4 * {{ $availabilitySloInvertPercentage }}))
+            )
+            or ignoring (sloth_window)
+            (
+                (slo:sli_error:ratio_rate30m{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"} > (6 * {{ $availabilitySloInvertPercentage }}))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate6h{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"} > (6 * {{ $availabilitySloInvertPercentage }}))
+            )
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            severity: critical
+            sloth_severity: page
+          annotations:
+            summary: High error rate on '{{ $serviceName }}' requests responses
+            {{`title: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+              burn rate is too fast.`}}
+        - alert: {{ $serviceName }}HighErrorRate
+          expr: |
+            (
+                (slo:sli_error:ratio_rate2h{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"} > (3 * {{ $availabilitySloInvertPercentage }}))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate1d{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"} > (3 * {{ $availabilitySloInvertPercentage }}))
+            )
+            or ignoring (sloth_window)
+            (
+                (slo:sli_error:ratio_rate6h{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"} > (1 * {{ $availabilitySloInvertPercentage }}))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate3d{sloth_id="{{ $serviceName }}-requests-availability", sloth_service="{{ $serviceName }}", sloth_slo="requests-availability"} > (1 * {{ $availabilitySloInvertPercentage }}))
+            )
+          labels:
+            category: availability
+            component: {{ $serviceName }}
+            owner: {{ .Values.owner }}
+            severity: critical
+            sloth_severity: ticket
+          annotations:
+            summary: High error rate on '{{ $serviceName }}' requests responses
+            {{`title: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+              burn rate is too fast.`}}
