@@ -50,7 +50,6 @@ metadata:
   annotations:
     backstage.io/kubernetes-id: backend
     backstage.io/kubernetes-namespace: fastapi-demo
-    github.com/project-slug: testruction/fastapi-sqlalchemy-cockroachdb
   links:
     - url: http://localhost/v1/docs
       title: Api documentation

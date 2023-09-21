@@ -10,7 +10,6 @@ metadata:
     - python3
     - ui
   annotations:
-    github.com/project-slug: testruction/fastapi-sqlalchemy-cockroachdb
     backstage.io/kubernetes-id: frontend
     backstage.io/kubernetes-namespace: fastapi-demo
   links:
