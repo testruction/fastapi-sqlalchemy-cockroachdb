@@ -82,10 +82,14 @@ spec:
             httpGet:
               path: /health
               port: http
+            initialDelaySeconds: 75
+            periodSeconds: 5
           readinessProbe:
             httpGet:
               path: /health
               port: http
+            initialDelaySeconds: 75
+            periodSeconds: 5
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
       {{- with .Values.backend.nodeSelector }}
