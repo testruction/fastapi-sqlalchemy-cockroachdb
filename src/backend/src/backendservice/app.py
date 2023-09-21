@@ -13,7 +13,7 @@ from backendservice.utils.userid import get_openid_user
 from backendservice.models import postgres
 from backendservice.database import engine
 # Controlers
-from backendservice.controllers.postgres import FakenamesApis as PostgresApis
+from backendservice.controllers.fakenames import FakenamesApis
 from backendservice.controllers.health import HealthApis
 
 
@@ -26,7 +26,7 @@ def create_app():
     app = FastAPI(docs_url="/v1/docs",
                   openapi_url="/v1/openapi.json")
 
-    app.include_router(PostgresApis.router)
+    app.include_router(FakenamesApis.router)
     app.include_router(HealthApis.router)
 
     Instrumentator().instrument(app).expose(app)
