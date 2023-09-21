@@ -17,7 +17,7 @@ parser.add_argument('--trace-stdout',
 parser.add_argument('--database-engine',
                     type=str,
                     help='Database engine (cockroachdb, postgres, sqlite)',
-                    default=os.environ.get('DATABASE_ENGINE', default='cockroachdb'))
+                    default=os.environ.get('DATABASE_ENGINE', default='sqlite'))
 parser.add_argument('--database-host',
                     type=str,
                     help='Hostname, fully qualified name or IP address',
