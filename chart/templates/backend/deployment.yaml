@@ -82,13 +82,21 @@ spec:
             httpGet:
               path: /health
               port: http
+            {{- if .Values.jaeger.create }}
+            initialDelaySeconds: 20
+            {{- else }}
             initialDelaySeconds: 75
+            {{- end }}
             periodSeconds: 5
           readinessProbe:
             httpGet:
               path: /health
               port: http
-            initialDelaySeconds: 75
+            {{- if .Values.jaeger.create }}
+            initialDelaySeconds: 5
+            {{- else }}
+            initialDelaySeconds: 15
+            {{- end }}
             periodSeconds: 5
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
