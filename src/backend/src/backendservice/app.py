@@ -14,6 +14,7 @@ from backendservice.models import postgres
 from backendservice.database import engine
 # Controlers
 from backendservice.controllers.fakenames import FakenamesApis
+from backendservice.controllers.status_code import StatusCodeApis
 from backendservice.controllers.health import HealthApis
 
 
@@ -27,6 +28,7 @@ def create_app():
                   openapi_url="/v1/openapi.json")
 
     app.include_router(FakenamesApis.router)
+    app.include_router(StatusCodeApis.router)
     app.include_router(HealthApis.router)
 
     Instrumentator().instrument(app).expose(app)
