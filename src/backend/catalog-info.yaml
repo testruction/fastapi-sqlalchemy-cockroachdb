@@ -48,6 +48,10 @@ metadata:
     - python3
     - ui
   annotations:
+    prometheus.io/alert: >-
+      demo-fastapi-backendHighErrorRate
+    prometheus.io/rule: >-
+      slo:sli_error:ratio_rate5m{sloth_service="demo-fastapi-backend"}
     backstage.io/kubernetes-id: backend
     backstage.io/kubernetes-namespace: fastapi-demo
   links:
