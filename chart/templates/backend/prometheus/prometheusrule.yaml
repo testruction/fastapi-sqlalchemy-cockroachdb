@@ -16,7 +16,7 @@ spec:
       rules:
         - record: slo:sli_error:ratio_rate5m
           expr: |
-            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[5m:])) OR on() vector(0))
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",status=~"(5..|429)"})[5m:])) OR on() vector(0))
             /
             (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[5m:])))
           labels:
@@ -30,7 +30,7 @@ spec:
             sloth_window: 5m
         - record: slo:sli_error:ratio_rate30m
           expr: |
-            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[30m:])) OR on() vector(0))
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",status=~"(5..|429)"})[30m:])) OR on() vector(0))
             /
             (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[30m:])))
           labels:
@@ -44,7 +44,7 @@ spec:
             sloth_window: 30m
         - record: slo:sli_error:ratio_rate1h
           expr: |
-            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[1h:])) OR on() vector(0))
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",status=~"(5..|429)"})[1h:])) OR on() vector(0))
             /
             (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[1h:])))
           labels:
@@ -58,7 +58,7 @@ spec:
             sloth_window: 1h
         - record: slo:sli_error:ratio_rate2h
           expr: |
-            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[2h:])) OR on() vector(0))
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",status=~"(5..|429)"})[2h:])) OR on() vector(0))
             /
             (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[2h:])))
           labels:
@@ -72,7 +72,7 @@ spec:
             sloth_window: 2h
         - record: slo:sli_error:ratio_rate6h
           expr: |
-            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[6h:])) OR on() vector(0))
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",status=~"(5..|429)"})[6h:])) OR on() vector(0))
             /
             (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[6h:])))
           labels:
@@ -86,7 +86,7 @@ spec:
             sloth_window: 6h
         - record: slo:sli_error:ratio_rate1d
           expr: |
-            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[1d:])) OR on() vector(0))
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",status=~"(5..|429)"})[1d:])) OR on() vector(0))
             /
             (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[1d:])))
           labels:
@@ -100,7 +100,7 @@ spec:
             component: {{ $serviceName }}
         - record: slo:sli_error:ratio_rate3d
           expr: |
-            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",code=~"(5..|429)"})[3d:])) OR on() vector(0))
+            (sum(count_over_time((http_requests_total{service="{{ $serviceName }}",status=~"(5..|429)"})[3d:])) OR on() vector(0))
             /
             (sum(count_over_time((http_requests_total{service="{{ $serviceName }}"})[3d:])))
           labels:
