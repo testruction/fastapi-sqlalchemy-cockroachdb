@@ -31,7 +31,8 @@ def create_app():
     app.include_router(StatusCodeApis.router)
     app.include_router(HealthApis.router)
 
-    Instrumentator().instrument(app).expose(app)
+    Instrumentator(should_group_status_codes=False,
+                   excluded_handlers=[".*admin.*", "/health", "/metrics"],).instrument(app).expose(app)
 
     # Enable FastApi telemetry
     def request_hook(span: trace.get_current_span(), scope: dict):
@@ -40,7 +41,7 @@ def create_app():
 
     FastAPIInstrumentor().instrument_app(app,
                                          client_request_hook=request_hook,
-                                         excluded_urls="health")
+                                         excluded_urls="/health,/metrics")
 
     return app
 

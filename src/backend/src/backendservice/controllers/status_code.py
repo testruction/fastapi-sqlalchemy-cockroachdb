@@ -34,35 +34,35 @@ def core(response, codes):
 class StatusCodeApis():
     router = APIRouter()
 
-    @router.get("/status/{codes}",
+    @router.get("/v1/status/{codes}",
                 summary="Return status code or random one if multiple given as comma-delimited list (Underscores are also permitted as delimiters)")
     def get(response: Response,
             codes: str = Path(min_length=3, regex="^[0-9,_]+$", example="200,201,204")):
         response = core(response, codes)
         return response
 
-    @router.post("/status/{codes}",
+    @router.post("/v1/status/{codes}",
                  summary="Return status code or random one if multiple given as comma-delimited list (Underscores are also permitted as delimiters)")
     def post(response: Response,
              codes: str = Path(min_length=3, regex="^[0-9,_]+$", example="200,201,204")):
         response = core(response, codes)
         return response
 
-    @router.put("/status/{codes}",
+    @router.put("/v1/status/{codes}",
                 summary="Return status code or random one if multiple given as comma-delimited list (Underscores are also permitted as delimiters)")
     def put(response: Response,
             codes: str = Path(min_length=3, regex="^[0-9,_]+$", example="200,201,204")):
         response = core(response, codes)
         return response
 
-    @router.patch("/status/{codes}",
+    @router.patch("/v1/status/{codes}",
                   summary="Return status code or random one if multiple given as comma-delimited list (Underscores are also permitted as delimiters)")
     def patch(response: Response,
               codes: str = Path(min_length=3, regex="^[0-9,_]+$", example="200,201,204")):
         response = core(response, codes)
         return response
 
-    @router.delete("/status/{codes}",
+    @router.delete("/v1/status/{codes}",
                    summary="Return status code or random one if multiple given as comma-delimited list (Underscores are also permitted as delimiters)")
     def delete(response: Response,
                codes: str = Path(min_length=3, regex="^[0-9,_]+$", example="200,201,204")):
