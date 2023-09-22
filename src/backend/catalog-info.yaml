@@ -9,7 +9,7 @@ metadata:
     backstage.io/kubernetes-namespace: fastapi-demo
 spec:
   type: database
-  owner: "testruction.io"
+  owner: testructer
   system: fastapi-demo
   tags:
     - postgres
@@ -32,7 +32,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: "testruction.io"
+  owner: testructer
   system: fastapi-demo
   definition:
     $text: https://github.com/testruction/fastapi-sqlalchemy-cockroachdb/blob/main/specs/openapi.yaml
@@ -62,7 +62,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: "testruction.io"
+  owner: testructer
   system: fastapi-demo
   dependsOn:
     - resource:fakenames-db

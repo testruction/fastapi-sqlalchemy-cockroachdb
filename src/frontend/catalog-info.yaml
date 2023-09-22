@@ -32,7 +32,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: "testruction.io"
+  owner: testructer
   system: fastapi-demo
   consumesApis:
     - api:fakenames

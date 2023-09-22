@@ -5,18 +5,33 @@ kind: Location
 metadata:
   name: fastapi-demo
   description: Demo of a FastAPI frontend/backend application leveraging SqlAlchemy and CoackroachDB
-  annotations:
-    backstage.io/kubernetes-id: fastapi-demo
 spec:
   targets:
     - ./src/backend/catalog-info.yaml
     - ./src/frontend/catalog-info.yaml
 ---
-# # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
-# apiVersion: backstage.io/v1alpha1
-# kind: Group
-# metadata:
-#   name: "testruction.io"
-# spec:
-#   type: root
-#   children: []
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: testructer
+spec:
+  type: root
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: demo
+  description: Demonstrate technology concepts and implementation
+spec:
+  owner: artist-relations-team
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: fastapi-demo
+  description: Demo of a FastAPI frontend/backend application leveraging SqlAlchemy and CoackroachDB
+spec:
+  owner: testructer
+  domain: demo
