@@ -1,4 +1,4 @@
-{{- $serviceMonitor := .Values.frontend.serviceMonitor -}}
+{{- $serviceMonitor := .Values.frontend.metrics.serviceMonitor -}}
 {{- $port := .Values.frontend.service.port -}}
 {{- if $serviceMonitor.enabled }}
 apiVersion: monitoring.coreos.com/v1
@@ -37,7 +37,7 @@ spec:
   endpoints:
   - port: http
   # - targetPort: http
-    path: /metrics
+    path: {{ $serviceMonitor.path }}
     {{- if $serviceMonitor.interval }}
     interval: {{ $serviceMonitor.interval }}
     {{- end }}

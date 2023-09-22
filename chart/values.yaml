@@ -97,15 +97,16 @@ backend:
       database: postgres
   extraLabels:
     backstage.io/kubernetes-id: backend
-  serviceMonitor:
-    enabled: false
-    labels: {}
-    annotations: {}
-    interval: 10s
-    # scrapeTimeout: 10s
-    # Limits the ServiceMonitor to the current namespace if set to `true`.
-    namespaced: true
-
+  metrics:
+    serviceMonitor:
+      enabled: false
+      labels: {}
+      annotations: {}
+      interval: 10s
+      scrapeTimeout: null
+      # Limits the ServiceMonitor to the current namespace if set to `true`.
+      namespaced: true
+      path: /metrics
 
 # Frontend
 frontend:
@@ -188,14 +189,16 @@ frontend:
     insecure: true
   extraLabels:
     backstage.io/kubernetes-id: frontend
-  serviceMonitor:
-    enabled: false
-    labels: {}
-    annotations: {}
-    interval: 10s
-    # scrapeTimeout: 10s
-    # Limits the ServiceMonitor to the current namespace if set to `true`.
-    namespaced: true
+  metrics:
+    serviceMonitor:
+      enabled: false
+      labels: {}
+      annotations: {}
+      interval: 10s
+      scrapeTimeout: null
+      # Limits the ServiceMonitor to the current namespace if set to `true`.
+      namespaced: true
+      path: /metrics
 
 global:
   serviceAccount:
