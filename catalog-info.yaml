@@ -10,23 +10,7 @@ spec:
     - ./src/backend/catalog-info.yaml
     - ./src/frontend/catalog-info.yaml
 ---
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
-apiVersion: backstage.io/v1alpha1
-kind: Group
-metadata:
-  name: testructer
-spec:
-  type: root
-  children: []
----
-apiVersion: backstage.io/v1alpha1
-kind: Domain
-metadata:
-  name: demo
-  description: Demonstrate technology concepts and implementation
-spec:
-  owner: artist-relations-team
----
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-system
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
