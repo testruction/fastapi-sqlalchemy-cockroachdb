@@ -6,7 +6,7 @@ owner: "testruction.io"
 repository:
   slug: testruction/fastapi-sqlalchemy-cockroachdb
 slo:
-  availabilityRate: '99.5'
+  availabilityRate: 99.5
 
 # Backend
 backend:
