@@ -4,9 +4,6 @@ kind: Resource
 metadata:
   name: fakenames-db
   description: Cockroach database populated from https://fakenames.org dataset
-  annotations:
-    backstage.io/kubernetes-id: cockroachdb
-    backstage.io/kubernetes-namespace: fastapi-demo
 spec:
   type: database
   owner: testructer
@@ -23,9 +20,6 @@ metadata:
     - rest
     - fastapi
     - python3
-  annotations:
-    backstage.io/kubernetes-id: backend
-    backstage.io/kubernetes-namespace: fastapi-demo
   # annotations:
   #   # The annotation is deprecated, we use placeholders (see below) instead, remove it later.
   #   backstage.io/definition-at-location: 'url:https://raw.githubusercontent.com/APIs-guru/openapi-directory/master/APIs/spotify.com/v1/swagger.yaml'
@@ -48,6 +42,7 @@ metadata:
     - python3
     - ui
   annotations:
+    argocd/app-name: demo
     prometheus.io/alert: >-
       demo-fastapi-backendHighErrorRate
     prometheus.io/rule: >-

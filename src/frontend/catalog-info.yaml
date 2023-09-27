@@ -10,6 +10,7 @@ metadata:
     - python3
     - ui
   annotations:
+    argocd/app-name: demo
     prometheus.io/alert: >-
       demo-fastapi-frontendHighErrorRate
     prometheus.io/rule: >-
