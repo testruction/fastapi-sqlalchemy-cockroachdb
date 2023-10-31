@@ -62,4 +62,4 @@ spec:
   dependsOn:
     - resource:fakenames-db
   providesApis:
-    - fakenames
+    - api:fakenames
