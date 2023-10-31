@@ -36,6 +36,6 @@ spec:
   owner: testructer
   system: fastapi-demo
   consumesApis:
-    - api:fakenames
+    - fakenames
   dependsOn:
     - component:backend
