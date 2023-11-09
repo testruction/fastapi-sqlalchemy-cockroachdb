@@ -47,7 +47,7 @@ metadata:
       demo-fastapi-backendHighErrorRate
     prometheus.io/rule: >-
       slo:sli_error:ratio_rate5m{sloth_service="demo-fastapi-backend"}
-    backstage.io/kubernetes-id: backend
+    backstage.io/kubernetes-id: fastapi-demo
     backstage.io/kubernetes-namespace: fastapi-demo
   links:
     - url: http://localhost/v1/docs
