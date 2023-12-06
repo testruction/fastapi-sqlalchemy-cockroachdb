@@ -3,6 +3,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: frontend
+  namespace: demo
   description: FastApi and Dash frontend demonstration
   tags:
     - fastapi
