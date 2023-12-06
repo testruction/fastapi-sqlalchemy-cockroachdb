@@ -3,6 +3,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
   name: fakenames-db
+  namespace: demo
   description: Cockroach database populated from https://fakenames.org dataset
 spec:
   type: database
@@ -35,6 +36,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: backend
+  namespace: demo
   description: FastApi backend API demonstration
   tags:
     - fastapi
