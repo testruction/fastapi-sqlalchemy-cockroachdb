@@ -4,6 +4,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
   name: fastapi-demo
+  namespace: demo
   description: Demo of a FastAPI frontend/backend application leveraging SqlAlchemy and CoackroachDB
 spec:
   targets:
