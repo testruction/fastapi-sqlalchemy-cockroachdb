@@ -8,7 +8,7 @@ metadata:
     {{- with .Values.backend.extraLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
-  {{- with .Values.annotations }}
+  {{- with .Values.backend.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
