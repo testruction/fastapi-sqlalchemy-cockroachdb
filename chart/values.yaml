@@ -11,6 +11,7 @@ slo:
 # Backend
 backend:
   replicaCount: 1
+  annotations: {}
   image:
     repository: ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/backend
     pullPolicy: IfNotPresent
@@ -43,6 +44,7 @@ backend:
   service:
     type: ClusterIP
     port: 80
+    annotations: {}
   ingress:
     enabled: false
     className: ""
@@ -111,6 +113,7 @@ backend:
 # Frontend
 frontend:
   replicaCount: 1
+  annotations: {}
   image:
     repository: ghcr.io/testruction/fastapi-sqlalchemy-cockroachdb/frontend
     pullPolicy: IfNotPresent
@@ -143,6 +146,7 @@ frontend:
   service:
     type: ClusterIP
     port: 80
+    annotations: {}
   ingress:
     enabled: false
     className: ""
