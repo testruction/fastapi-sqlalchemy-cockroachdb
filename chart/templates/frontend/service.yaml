@@ -8,6 +8,10 @@ metadata:
     {{- with .Values.frontend.extraLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.frontend.service.type }}
   ports:
