@@ -16,7 +16,7 @@ metadata:
       demo-fastapi-frontendHighErrorRate
     prometheus.io/rule: >-
       slo:sli_error:ratio_rate5m{sloth_service="demo-fastapi-frontend"}
-    backstage.io/label-selector: 'app.kubernetes.io/component=frontend'
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/component=frontend'
   links:
     - url: http://localhost
       title: Home page
