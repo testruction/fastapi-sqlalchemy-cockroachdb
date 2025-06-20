@@ -17,6 +17,7 @@ metadata:
     prometheus.io/rule: >-
       slo:sli_error:ratio_rate5m{sloth_service="demo-fastapi-frontend"}
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=fastapi,app.kubernetes.io/component=frontend,app.kubernetes.io/instance=demo'
+    github.com/project-slug: testruction/fastapi-sqlalchemy-cockroachdb
   links:
     - url: http://localhost
       title: Home page
