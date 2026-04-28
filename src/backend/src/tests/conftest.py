@@ -3,6 +3,7 @@ import logging
 from pathlib import Path
 import csv
 import itertools
+from datetime import datetime
 
 from contextlib import closing
 
@@ -47,6 +48,9 @@ def dbsession(engine, tables):
             reader = csv.DictReader(lower_first(f))
 
             for row in reader:
+                # Parse birthday string to datetime object for SQLAlchemy 2.0 SQLite compatibility
+                if 'birthday' in row and row['birthday']:
+                    row['birthday'] = datetime.strptime(row['birthday'], '%m/%d/%Y')
                 session.add(postgres.Fakenames(**row))
         session.commit()
 

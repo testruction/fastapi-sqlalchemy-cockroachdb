@@ -53,7 +53,7 @@ def test_route_create(dbsession, client):
                     guid:      "{payload['guid']}"
                     ''')
 
-        response = client.post("/v1/fakenames/snowflake",
+        response = client.post("/v1/fakenames",
                                content=json.dumps(payload))
 
     assert response.status_code == 201
@@ -61,7 +61,7 @@ def test_route_create(dbsession, client):
 
 def test_route_read_all_limit_default(dbsession, client):
     limit = 100  # Default limit
-    response = client.get('/v1/fakenames/snowflake')
+    response = client.get('/v1/fakenames')
 
     json_data = response.json()
     logger.info(f'Found "{len(json_data)}/{limit}" JSON records')
@@ -70,7 +70,7 @@ def test_route_read_all_limit_default(dbsession, client):
 
 def test_route_read_all_limit_1000(dbsession, client):
     limit = 1000
-    response = client.get(f'/v1/fakenames/snowflake?limit={limit}')
+    response = client.get(f'/v1/fakenames?limit={limit}')
 
     json_data = response.json()
     logger.info(f'Found "{len(json_data)}/{limit}" JSON records')
@@ -79,7 +79,7 @@ def test_route_read_all_limit_1000(dbsession, client):
 
 def test_route_read(dbsession, client):
     guid = '71160a30-b20f-4cef-91d9-5cf57c5112e4'
-    response = client.get(f"/v1/fakenames/snowflake/{guid}")
+    response = client.get(f"/v1/fakenames/{guid}")
 
     json_data = response.json()
     logger.info(f'''
@@ -110,7 +110,7 @@ def test_route_patch(dbsession, client):
                     guid:      "{payload['guid']}"
                     ''')
 
-        response = client.patch("/v1/fakenames/snowflake",
+        response = client.patch("/v1/fakenames",
                                 content=json.dumps(payload))
     assert response.status_code == 200
     assert response.json()['guid'] == payload['guid']
@@ -118,8 +118,8 @@ def test_route_patch(dbsession, client):
 
 
 def test_model_delete(dbsession, client):
-    guid = '9dc0ed75-61fc-47a4-8ad8-57206ff37add'
-    check = client.get(f"/v1/fakenames/snowflake/{guid}")
+    guid = 'd677bb1a-5166-4cb7-9b0a-a012e5055af5'
+    check = client.get(f"/v1/fakenames/{guid}")
 
     json_data = check.json()
 
@@ -131,7 +131,7 @@ def test_model_delete(dbsession, client):
                 guid:      "{json_data['guid']}"
                 ''')
 
-    response = client.delete(f"/v1/fakenames/snowflake/{json_data['guid']}")
+    response = client.delete(f"/v1/fakenames/{json_data['guid']}")
     assert response.status_code == 200
     assert response.json()['deleted'] is True
     assert response.json()['guid'] == json_data['guid']
