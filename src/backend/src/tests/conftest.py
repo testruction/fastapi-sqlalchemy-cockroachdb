@@ -1,6 +1,6 @@
 import pytest
 import logging
-import pkg_resources
+from pathlib import Path
 import csv
 import itertools
 
@@ -14,8 +14,7 @@ from backendservice.models import postgres
 
 logger = logging.getLogger(__name__)
 
-dataset = pkg_resources.resource_filename(__name__,
-                                          'unit/fakenames.csv')
+dataset = str(Path(__file__).parent / 'unit/fakenames.csv')
 
 
 @pytest.fixture(scope="session")

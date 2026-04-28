@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import uvicorn
-import pkg_resources
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
@@ -31,8 +31,7 @@ def create_app():
     """
     app = FastAPI()
 
-    STATICS = pkg_resources.resource_filename(__name__,
-                                              'static')
+    STATICS = str(Path(__file__).parent / 'static')
 
     app.mount("/static/", StaticFiles(directory=STATICS), name="static")
     app.include_router(HealthApis.router)

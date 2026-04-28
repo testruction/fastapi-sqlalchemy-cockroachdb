@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
-import pkg_resources
+from pathlib import Path
 import csv
 import uuid
 import hashlib
@@ -18,8 +18,7 @@ logger = logging.getLogger(__name__)
 #     logger = logging.getLogger(name=logger_name)
 # logger.setLevel(logging.INFO)
 
-dataset = pkg_resources.resource_filename(__name__,
-                                          'fakenames.csv')
+dataset = str(Path(__file__).parent / 'fakenames.csv')
 
 
 def lower_first(iterator):

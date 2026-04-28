@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 import logging
-import pkg_resources
+from pathlib import Path
 
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
-TEMPLATES_DIR = pkg_resources.resource_filename(__name__,
-                                                'templates')
+TEMPLATES_DIR = str(Path(__file__).parent / 'templates')
 TEMPLATES = Jinja2Templates(directory=TEMPLATES_DIR)
 
 logger = logging.getLogger(__name__)

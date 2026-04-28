@@ -4,7 +4,7 @@ import logging
 import hashlib
 import uuid
 import itertools
-import pkg_resources
+from pathlib import Path
 import csv
 import json
 from datetime import datetime
@@ -18,8 +18,7 @@ from backendservice.app import create_app
 
 logger = logging.getLogger(__name__)
 
-dataset = pkg_resources.resource_filename(__name__,
-                                          'fakenames.csv')
+dataset = str(Path(__file__).parent / 'fakenames.csv')
 
 
 def lower_first(iterator):
