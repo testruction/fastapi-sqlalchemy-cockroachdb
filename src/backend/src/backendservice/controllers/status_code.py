@@ -37,34 +37,34 @@ class StatusCodeApis():
     @router.get("/v1/status/{codes}",
                 summary="Return status code or random one if multiple given as comma-delimited list (Underscores are also permitted as delimiters)")
     def get(response: Response,
-            codes: str = Path(min_length=3, regex="^[0-9,_]+$", example="200,201,204")):
+            codes: str = Path(min_length=3, pattern="^[0-9,_]+$", example="200,201,204")):
         response = core(response, codes)
         return response
 
     @router.post("/v1/status/{codes}",
                  summary="Return status code or random one if multiple given as comma-delimited list (Underscores are also permitted as delimiters)")
     def post(response: Response,
-             codes: str = Path(min_length=3, regex="^[0-9,_]+$", example="200,201,204")):
+             codes: str = Path(min_length=3, pattern="^[0-9,_]+$", example="200,201,204")):
         response = core(response, codes)
         return response
 
     @router.put("/v1/status/{codes}",
                 summary="Return status code or random one if multiple given as comma-delimited list (Underscores are also permitted as delimiters)")
     def put(response: Response,
-            codes: str = Path(min_length=3, regex="^[0-9,_]+$", example="200,201,204")):
+            codes: str = Path(min_length=3, pattern="^[0-9,_]+$", example="200,201,204")):
         response = core(response, codes)
         return response
 
     @router.patch("/v1/status/{codes}",
                   summary="Return status code or random one if multiple given as comma-delimited list (Underscores are also permitted as delimiters)")
     def patch(response: Response,
-              codes: str = Path(min_length=3, regex="^[0-9,_]+$", example="200,201,204")):
+              codes: str = Path(min_length=3, pattern="^[0-9,_]+$", example="200,201,204")):
         response = core(response, codes)
         return response
 
     @router.delete("/v1/status/{codes}",
                    summary="Return status code or random one if multiple given as comma-delimited list (Underscores are also permitted as delimiters)")
     def delete(response: Response,
-               codes: str = Path(min_length=3, regex="^[0-9,_]+$", example="200,201,204")):
+               codes: str = Path(min_length=3, pattern="^[0-9,_]+$", example="200,201,204")):
         response = core(response, codes)
         return response

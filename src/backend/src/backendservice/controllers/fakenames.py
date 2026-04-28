@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import logging
-from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException
 
@@ -34,7 +33,7 @@ class FakenamesApis():
             raise HTTPException(status_code=400, detail=f'Identity already exists with guid "{check.guid}"')
         return crud.create(db=db, identity=identity)
 
-    @router.get('/v1/fakenames', response_model=List[schemas.Fakenames], status_code=200)
+    @router.get('/v1/fakenames', response_model=list[schemas.Fakenames], status_code=200)
     def read_all(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
         """ Returns all fake identities """
         identities = crud.read_all(db=db, skip=skip, limit=limit)

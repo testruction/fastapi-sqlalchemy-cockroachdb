@@ -29,7 +29,7 @@ def create(db: Session, identity: schemas.FakenamesCreate):
         span.set_attributes({'enduser.id': get_openid_user(Request)})
 
         try:
-            response = models.Fakenames(**identity.dict())
+            response = models.Fakenames(**identity.model_dump())
             guid = identity.guid
             db.add(response)
             db.commit()
@@ -99,7 +99,7 @@ def update(db: Session, identity: schemas.FakenamesCreate) -> bool:
         span.set_attributes({'enduser.id': get_openid_user(Request)})
 
         try:
-            response = models.Fakenames(**identity.dict())
+            response = models.Fakenames(**identity.model_dump())
             guid = response.guid
             db.merge(response)
             db.commit()

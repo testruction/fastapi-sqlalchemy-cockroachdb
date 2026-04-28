@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import datetime
 import logging
-import pkg_resources
+from pathlib import Path
 import itertools
 import csv
 from contextlib import closing
@@ -19,8 +19,7 @@ logger = logging.getLogger(__name__)
 logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 logger.setLevel('INFO')
 
-dataset = pkg_resources.resource_filename(__name__,
-                                          '../tests/unit/fakenames.csv')
+dataset = str(Path(__file__).parent / '../tests/unit/fakenames.csv')
 
 
 def lower_first(iterator):
